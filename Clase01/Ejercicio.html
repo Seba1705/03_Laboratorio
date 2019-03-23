@@ -4,26 +4,48 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Formulario</title>
-        
+        <script>
+            //EVENTOS
+            window.onload = carga;
+            
+            function validarUsuario()
+            {
+                var contraseña = document.getElementById("usrPass");
+                var usuario = document.getElementById("usrPass");
+                if(usuario.value === "seba" && contraseña.value === "seba")
+                    alert("Correcto");
+                else
+                    alert("Incorrecto");
+            }                         
+
+            function carga()
+            {
+                document.getElementById("btn").addEventListener("click",validarUsuario);
+                document.getElementById("btn").addEventListener("click",function(){alert("Funcion");});
+                document.getElementById("btn").removeEventListener("click",validarUsuario);
+            }          
+                            
+                    
+
+        </script>
     </head>
 
     <body>
         <!--accion=direccion de servidor-->
-        <form accion="" method="GET">
-            <fieldset disabled="disabled">
+        <!--<form accion="" method="GET">-->
+            <fieldset>
                 <legend>Login:</legend>
                 Usuario <br>
-                <input type="text" name"txtUsr"/> <br>
+                <input id="usr" type="text" name"txtUsr"/> <br>
                 Contraseña <br>
-                <input type="password" name"txtPass"> <br>
+                <input id="usrPass" type="password" name"txtPass"> <br>
                 <input type="checkbox"/>
                 Recordar usar contraseña <br>
-                <input type="submit" value="Enviar"/> 
+                <input id="btn" type="button" value="Enviar"/> 
                 <input type="button" value="Limpiar"/> <br>
             </fieldset>
-            
-            
-        </form>
+             
+        <!--</form-->
 
     </body>
 </html>
