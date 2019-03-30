@@ -1,0 +1,73 @@
+p{
+    color: red;   /*color de fuente*/
+    font-size: 18px /*Tamanio fuente*/
+}
+
+p.negrita{ 
+    font-weight: bold; /*class negrita*/
+    font-size: 20px;
+}
+
+p.fondo{
+    background-color: aquamarine;
+}
+
+.cualquierclase{ /*con el punto afecta a cuallquier elemnto que contenga esa clase*/
+    font-weight: bold; 
+}
+
+h1{
+    color: blue;
+}
+
+.rojo{
+    background-color: red;
+    color: white;
+    width: 130px; /*ancho*/
+    font-weight: bold;
+    height: 50px; /*alto*/
+    border-radius: 15px; /*redondear esquinas*/
+    cursor: pointer; /*aparece la manito al pasar por el boton*/
+    margin: 20px 20px 20px 20px; /*distancia con el resto de elementos*/
+    padding: 50px 0px 50px 0px; /*distancia del interior a las letras*/
+    text-align: center;
+}
+
+.verde{
+    background-color: green;
+    color: white;
+    width: 130px; /*ancho*/
+    font-weight: bold;
+    height: 50px; /*alto*/
+    border-radius: 15px; /*redondear esquinas*/
+    cursor: pointer; /*aparece la manito al pasar por el boton*/
+    text-align: center;
+}
+
+.azul{
+    background-color: blue;
+    color: white;
+    width: 190px; /*ancho*/
+    font-weight: bold;
+    height: 50px; /*alto*/
+    border-radius: 15px; /*redondear esquinas*/
+    cursor: pointer; /*aparece la manito al pasar por el boton*/
+    text-align: center;
+}
+
+input{
+    text-align: right;
+    margin: 10px 1px 10px 10px;
+    font-weight: bold;
+    background-color: beige;
+    font-size: 15px;
+}
+
+.azul:hover(){
+    background: lightblue;
+}
+
+label.negrita{ 
+    font-weight: bold; /*class negrita*/
+    font-size: 20px;
+}
