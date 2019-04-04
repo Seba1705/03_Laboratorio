@@ -24,6 +24,5 @@ function guardar()
     var res = document.getElementById("inRes").value;
 
     var tbody = document.getElementById("tbody");
-    tbody.innerHTML = "<tr><td>"+num1+"</td><td>"+num2+"</td><td>"+res+"</td></tr>";
-
+    tbody.innerHTML += "<tr><td>"+num1+"</td><td>"+num2+"</td><td>"+res+"</td></tr>";
 }
