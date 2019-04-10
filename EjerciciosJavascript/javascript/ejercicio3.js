@@ -4,8 +4,7 @@ El número 5 es impar, siendo 5 el número ingresado.
 Nota: Realizar la función que determine si un número es par o impar.*/
 
 var num = prompt("Ingrese un numero");
-validar(num);
-function validar(numero)
+validar(num);function validar(numero)
 {
     if(numero % 2 === 0)
         alert("Es par");

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejercicio 9</title>
+    <script src="./javascript/ejercicio9.js"></script>
+    <style>
+        form{
+            display: flex;
+            flex-flow: column wrap;
+            align-content: flex-start;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <!-- 9. Se necesita hacer una página que contenga dos cuadros de texto (dónde se ingresarán
+        números), un botón (con la leyenda ‘Calcular’) y cuatro controles de tipo ‘radioButton’
+        (suma, resta, multiplicación y división). Cuando se pulsa el botón una función deberá
+        mostrar el resultado, de acuerdo al tipo de operación que el usuario eligió. Utilizar la
+        estructura ‘switch’. -->
+        <form action="">
+            <input type="number" placeholder="Numero 1" id="num1">
+            <input type="number" placeholder="Numero 2" id="num2">
+            <input type="button" value="Operar" id="btnOperar">
+            <label for="suma">Suma</label>
+            <input type="radio" id="suma" name="operar" checked>
+            <label for="resta">Resta</label>
+            <input type="radio" id="resta" name="operar">
+            <label for="multiplicacion">Multiplicacion</label>
+            <input type="radio" id="multiplicacion" name="operar">
+            <label for="division">Division</label>
+            <input type="radio" id="division" name="operar">
+            <input type="number" placeholder="Resultado" id="resultado">
+        </form>
+    </main>
+</body>
+</html>

@@ -18,8 +18,6 @@ while(i)
         alert("Ingrese un numero positivo");
 }
 
-
-
 function factorial (n) 
 {
     var total = 1; 
