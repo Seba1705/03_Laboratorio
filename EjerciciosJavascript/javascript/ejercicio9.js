@@ -20,20 +20,19 @@ function operar(){
     var num1 = parseInt($("num1").value);
     var num2 = parseInt($("num2").value);
     var resultado;
-    var opcion = document.getElementsByName("Operar");
     
-    switch(opcion.value)
+    switch(true)
     {
-        case 1:
+        case document.getElementById("suma").checked:
           resultado = num1 + num2;
             break;
-        case 2:
+        case document.getElementById("resta").checked:
          resultado = num1 - num2;
             break;
-        case 3:
+        case document.getElementById("multiplicacion").checked:
             resultado = num1 * num2;
             break;
-        case 4:
+        case document.getElementById("division").checked:
             if(num2 != 0)
                 resultado = num1 / num2;
             break;
