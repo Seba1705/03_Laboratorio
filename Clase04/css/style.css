@@ -1,0 +1,22 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+
+    form{
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        background-color: cadetblue;
+        border-radius: 15px;
+        padding: 30px;
+        margin: 10px;
+        font-weight: bold;
+    }
+ 
+        input{
+            padding: 10px;
+            margin: 5px;
+        }
+
+      

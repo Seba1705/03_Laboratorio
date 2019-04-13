@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejercicio 14</title>
+    <script src="./javascript/ejercicio14.js"></script>
+    <style>
+        form{
+            display: flex;
+            flex-flow: column wrap;
+            align-content: flex-start;
+            text-align: left;
+            padding: 10px;
+            margin: 10px;
+            background-color: beige;
+        }
+            input{
+                margin:10px ;
+            }
+    </style>
+</head>
+<body>
+    <!-- 14.Realizar una página que permita el ingreso de: Apellido, Nombre, Dni y sexo de una
+    persona. Si el usuario pulsa el botón de confirmación se invocará a una función encargada
+    de validar cada uno de los datos ingresados (que tanto el nombre y apellido no estén
+    vacíos, que el documento sea numérico y que el sexo sea o ‘m’ o ‘f’). -->
+
+     <form action="">
+        <label for="name">Name</label>
+        <input type="text" id="name">
+        <label for="lastname">Lastname</label>
+        <input type="text" name="" id="lastname">
+        <label for="id">Id</label>
+        <input type="number" name="" id="id">
+        <label for="sex">Sex</label>
+        <input type="text" name="" id="sex">
+        <input type="button" id="btn" value="enviar">
+     </form>   
+
+</body>
+</html>
