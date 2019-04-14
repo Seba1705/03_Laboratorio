@@ -28,7 +28,7 @@ function operar(){
         var peticion = "?usr="+usr+"&pass="+pass;
         xhttp.onreadystatechange = callback;
         // xhttp.open("GET","http://192.168.2.28:3000/loginUsuario"+peticion,true); Metodo GET
-        xhttp.open("POST","localhost:3000/loginUsuario",true)
+        xhttp.open("POST","http://192.168.2.28:3000/loginUsuario",true)
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(peticion);  
         
@@ -47,11 +47,11 @@ function operar(){
     }   
 }
 
-var str = '{nombre:"Nicolas",apellido:"Aguirre"}';
-var object = {}; //json - objeto
-var array = []; //array
-var persona = {nombre:"Seba",apellido:"Aguirre",edad:"28"}; //json
-var personas = [{nombre:"Seba",apellido:"Aguirre",edad:"28"},{nombre:"Juan",apellido:"Perez",edad:"30"}] //array de Json
+// var str = '{nombre:"Nicolas",apellido:"Aguirre"}';
+// var object = {}; //json - objeto
+// var array = []; //array
+// var persona = {nombre:"Seba",apellido:"Aguirre",edad:"28"}; //json
+// var personas = [{nombre:"Seba",apellido:"Aguirre",edad:"28"},{nombre:"Juan",apellido:"Perez",edad:"30"}] //array de Json
 
-JSON.parse(str) // transforma un string a objeto json
+// JSON.parse(str) // transforma un string a objeto json
 
