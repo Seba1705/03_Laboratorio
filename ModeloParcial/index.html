@@ -21,6 +21,8 @@
   <!-- Custom styles for this template -->
   <link href="css/clean-blog.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
+
+  <script src="./js/js2.js"></script>
 </head>
 
 <body>
@@ -48,7 +50,7 @@
             <a class="nav-link" href="contact.html">Contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">New post</a>
+            <a class="nav-link" href="#" id="newPost">New post</a>
           </li>
         </ul>
       </div>
@@ -71,10 +73,10 @@
   </header>
   
   <!--Esto va a ser mi formulario -->
-  <div class="divOculto" >
+  <div class="divOculto" hidden>
       
     <form action="" class="formulario" method="post">
-        <input type="button" value="x" id="btnCerrar">
+      <input type="button" value="x" id="btnCerrar">
       <label for="">Post Title</label>
       <input type="text" name="" id="inputTitle">
       <label for="">Post Header</label>

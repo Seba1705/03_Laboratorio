@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+    
+    window.addEventListener("load", function(){
+        console.log(document);
+        var lista = document.getElementById("lista");
+        console.log(lista.firstChild);
+        //primer elemento hijo despues del salto de linea
+        console.log(lista.firstElementChild.nodeType);
+        //siguiente elemento al mismo nivel
+        console.log(lista.nextElementSibling);
+        
+
+
+
+    });
+    
+    
+    </script>
+</head>
+<body>
+    <ul id="lista">
+        <li>Java</li>
+        <li>Javascript</li>
+        <li>Typescript</li>
+    </ul>
+</body>
+</html>

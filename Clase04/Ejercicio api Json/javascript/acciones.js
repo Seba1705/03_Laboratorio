@@ -29,12 +29,43 @@ function agregar(){
         var resp = xhttp.responseText;
         console.log(resp);
         var obj = JSON.parse(resp);
+        
         for(var i=0; i<Object.keys(obj).length;i++ ){
             name = obj[i].nombre;
             lastname = obj[i].apellido;
             date = obj[i].fecha;
-            phone = obj[i].fecha;
-            body.innerHTML += "<tr><td>"+ name+"</td>"+"<td>"+ lastname+"</td>"+"<td>"+ date+"</td>"+"<td>"+ phone+"</td>"+"<td>"+"<a href=''>borrar</a>" + "</td></tr>";
-        }   
+            phone = obj[i].telefono;
+            //body.innerHTML += "<tr><td>"+ name+"</td>"+"<td>"+ lastname+"</td>"+"<td>"+ date+"</td>"+"<td>"+ phone+"</td>"+"<td>"+"<a href=''>borrar</a>" + "</td></tr>";
+        
+            var elementTr = document.createElement("tr");
+            body.appendChild(elementTr);
+            var elementTd = document.createElement("td");
+            elementTr.appendChild(elementTd);
+            var elementText = document.createTextNode(name);
+            elementTd.appendChild(elementText);
+
+            elementTd = document.createElement("td");
+            elementTr.appendChild(elementTd);
+            var elementText1 = document.createTextNode(lastname);
+            elementTd.appendChild(elementText1);
+
+            elementTd = document.createElement("td");
+            elementTr.appendChild(elementTd);
+            var elementText4 = document.createTextNode(phone);
+            elementTd.appendChild(elementText4);
+
+            elementTd = document.createElement("td");
+            elementTr.appendChild(elementTd);
+            var elementText2 = document.createTextNode(date);
+            elementTd.appendChild(elementText2);
+
+            elementTd = document.createElement("td");
+            elementTr.appendChild(elementTd);
+            var elementLink = document.createElement("a");
+            elementTd.appendChild(elementLink);
+            var elementText3 = document.createTextNode("borrar");
+            elementLink.appendChild(elementText3);
+    }
+
     }   
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+    
+    window.addEventListener("load", function(){
+        console.log(document);
+        var lista = document.getElementById("lista");
+        // console.log(lista.firstChild);
+        // console.log(lista.firstElementChild.nodeType);
+        //crear elemento DOM
+        var parrafo = document.getElementById("parrafo");
+        
+        var nuevoNodo = document.createTextNode("texto plano");
+        parrafo.appendChild(nuevoNodo);
+        
+        var nuevoElemento = document.createElement("li");
+        var nuevoNodoLi = document.createTextNode("otro");
+        nuevoElemento.appendChild(nuevoNodoLi);
+        lista.appendChild(nuevoElemento);
+
+        //borrar java
+        var primerElemento = lista.firstElementChild;
+        primerElemento.parentNode.removeChild(primerElemento);
+
+
+        
+    });
+
+    </script>
+</head>
+<body>
+    <p id="parrafo"></p>
+    <ul id="lista">
+        <li>Java</li>
+        <li>Javascript</li>
+        <li>Typescript</li>
+    </ul>
+</body>
+</html>
