@@ -8,7 +8,7 @@ function $(id)
     var elemento = document.getElementById(id);
     return elemento;
 }
-
+//verificar si localstorage es null cargo la lista del servidor, si no sigo con esa
 function agregar(){
     var name;
     var lastname;
@@ -26,9 +26,10 @@ function agregar(){
     function callback(){
         if(xhttp.readyState === 4 && xhttp.status === 200)
             console.log("Llego la repuesta del servidor");
-        var resp = xhttp.responseText;
-        console.log(resp);
-        var obj = JSON.parse(resp);
+        var per = xhttp.responseText;
+        console.log(per);
+        localStorage.setItem("Personas",JSON.stringify(per));
+        var obj = JSON.parse(per);
         
         for(var i=0; i<Object.keys(obj).length;i++ ){
             name = obj[i].nombre;
@@ -65,7 +66,44 @@ function agregar(){
             elementTd.appendChild(elementLink);
             var elementText3 = document.createTextNode("borrar");
             elementLink.appendChild(elementText3);
-    }
+            elementLink.setAttribute("href","#");
+            elementLink.addEventListener("click", borrar);
+        }
 
+        function borrar(e){
+            console.log("Borrado");
+            
+        }
     }   
 }
+
+// function llenarGrilla(per){
+//     var tCuerpo = document.getElementById("tbody");
+//     var personas = JSON.parse(per);
+//     for(var i=0; i<personas.length;i++){
+//         var row = document.createElement("tr");
+//         var obj = personas[i];
+//         var columns = Object.keys(obj);
+        
+//         for(var j=0;j<columns.length;j++){
+//             var cel = document.createElement("td");
+//             var text = document.createTextNode(obj[columns[j]]);
+//             col.appendChild(text);
+//             row.appendChild(cel);
+//         }
+//         var cel = document.createElement("td");
+//         var link = document.createElement("a");
+//         link.setAttribute("href","#")
+//         link.addEventListener("click", borrar);
+//         var text = document.createTextNode("borrar");
+//         link.appendChild(text);
+//         cel.appendChild(link);
+//         row.appendChild(cel);
+
+//         tCuerpo.appendChild(row);
+//     }
+// }    
+
+// function borrar(){
+
+// }
