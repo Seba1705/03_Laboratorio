@@ -8,26 +8,61 @@
         <title>Primer Parcial</title>
     </head>
     <body>
+        <!----------------------------- CONTAINER ----------------------------->
         <div class="container">
-            <header class="header">
-
+            <header class="header" id="header">
+                <!----------------------------- MOMBRE Y LOGO ----------------------------->
+                <div class="element-header-1">
+                    <img src="./logo/logo.png" alt="">
+                    <a href="#">Primer Parcial</a>
+                </div>
+                <!----------------------------- MENU ----------------------------->
+                <div class="element-header-2">
+                    <nav class="menu">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i>  Inicio</a></li>
+                            <li><a href="#experience"><i class="fa fa-briefcase" aria-hidden="true"></i>  Punto 1</a></li>
+                            <li><a href="#academic"><i class="fa fa-book" aria-hidden="true"></i>  Punto 2</a></li>
+                            <li><a href="#skills"><i class="fa fa-laptop" aria-hidden="true"></i>  Punto 3</a></li>
+                            <li><a href="#contact"><i class="fa fa-envelope" aria-hidden="true"></i> Punto 4</a></li>
+                        </ul>
+                    </nav>
+                </div>   
             </header>
+            <!----------------------------- MAIN ----------------------------->
             <main class="main">
-                <form action="" class="formulario">
-                    <h3>Formulario</h3>
-                    <label for="">Texto</label>
-                    <input type="text" class="input">
-                    <label for="">Numero</label>
-                    <input type="number" class="input">
-                    <label for="">Contraseña</label>
-                    <input type="password" class="input" id="pass">
-                    <input type="button" value="Boton" id="btn">
-                </form>
-            </main>
-            <footer class="footer">
+                <div>  
+                    <form action="" class="formulario">
+                        <h3>Formulario</h3>
+                        <label for="">Texto</label>
+                        <input type="text" class="input">
+                        <label for="">Numero</label>
+                        <input type="number" class="input">
+                        <label for="">Contraseña</label>
+                        <input type="password" class="input" id="pass">
+                        <input type="button" value="Boton" id="btn">
+                    </form>
+                </div>
+                <!-- <div> -->
+                    <table>
+                        <thead>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Telefono</th>
+                            <th>Fecha</th>
+                            <th>Accion</th>
+                        </thead>
+                        <tbody id="tbody">
+                            <!--InnerHtml-->
+                        </tbody>
+                    </table>
+                <!-- </div> -->
 
+            </main>
+            <!----------------------------- FOOTER ----------------------------->
+            <footer class="footer">
+                <p>FOOTER</p>
             </footer>
         </div>
-        <script src="./js/script.js"></script>
     </body>
 </html>

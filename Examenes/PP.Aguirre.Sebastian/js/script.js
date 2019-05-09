@@ -1,56 +1,35 @@
-//BUSCAR ELEMENTOS POR ID
+window.addEventListener("load", loadEvents);
+
+//Buscar elementos por Id
 function $(id){
-    var element = document.getElementById(id);
-    return element;
+    return document.getElementById(id);
 }
-
-//VARIABLES AJAX
+//
+function loadEvents(){
+    var btn = $("btn").addEventListener("click", enviarSolicitud);
+}
+//Variables para la conexion
+var servidor;
 var xhttp = new XMLHttpRequest();
-var server = "http://localhost:3000/";
-var respuestaServidor;
-
-//EVENTO LOAD DE WINDOWS
-window.addEventListener("load", function(){
-    var btn = $("btn");
-    btn.addEventListener("click", operar);
-});
-
-// window.load = loadEvents;
-
-// function loadEvents(){
-//     var btn = $("btn");
-//     btn.addEventListener("click", operar);
-// }
-
-function operar(){
-    console.log("Boton funciona");
+var respuestaDelServidor;
+//Funcion para enviar datos al Servidor via POST
+function request(params){
+    xhttp.onreadystatechange = function(){
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            respuestaDelServidor = xhttp.responseText; //Puede ser responseXml
+        }
+    };
+    xhttp.open("POST", servidor, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(params);
 }
-
-function callback(){
-/*  readyState
-    0: no inicializado. Indica que no se ha abierto la conexión con el servidor (no se ha llamado a open)
-    1: conexión con servidor establecida. Indica que se ha abierto la conexión pero todavía no se ha enviado la petición (no se ha llamado a send)
-    2: recibida petición en servidor. Indica que el servidor ya ha recibido la petición (se ha llamado a send)
-    3: enviando información. Se está enviando la información por parte del servidor, todavía no se ha completado la recepción.
-    4: completado. Se ha recibido la información del servidor y está lista para operar con ella.*/
-    if(xhttp.readyState == 4 && xhttp.status == 200) //200 OK indica que la solicitud ha tenido éxito.
-    {   
-        console.log(xhttp.responseText);
-    }
-    else{
-        alert("Error Servidor - Codigo: " + xhttp.status);
-    }
-}
-
-function solicitud(tipo, callback, params, accion){
-    xhttp.onreadystatechange = callback;
-    if(tipo == 'POST'){
-        xhttp.open("POST",servidor + accion,true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send(params); 
-    }
-    else if(tipo == 'GET'){
-        xhttp.open("GET",servidor + accion,true);
-        xhttp.send();
-    }
+//Recibir datos del servidor via GET
+function response(){
+    xhttp.onreadystatechange = function(){
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            respuestaDelServidor = xhttp.responseText; //Puede ser responseXml
+        }
+    };
+    xhttp.open("GET", servidor, true);
+    xhttp.send();
 }
