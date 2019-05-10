@@ -101,9 +101,10 @@ body{
         grid-area: main;
         height: 60vh;
         display: flex;
-        flex-flow: column wrap;
+        flex-flow: row wrap;
         justify-content: center;
         align-items: center;
+        background: white;
     }
 
 
@@ -161,6 +162,10 @@ body{
     .formulario label{
         text-align: center;
         width: 100%;
+    }
+
+    #btnCerrar{
+        
     }
 
 /************************************************************ TABLA ************************************************************/
