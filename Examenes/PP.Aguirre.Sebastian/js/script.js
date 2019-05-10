@@ -33,3 +33,12 @@ function response(){
     xhttp.open("GET", servidor, true);
     xhttp.send();
 }
+
+function mostrarSpinner(estado){
+    var spinner = $("cont-spinner");
+    spinner.hidden = estado;
+}
+
+function enviarSolicitud(){
+    console.log("Hacer algo");
+}
