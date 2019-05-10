@@ -7,6 +7,9 @@ function $(id){
 //
 function loadEvents(){
     var btn = $("btn").addEventListener("click", enviarSolicitud);
+    var btn = $("btnCerrar").addEventListener("click", cerrar);
+    var mostrarForm = $("mostrar");
+    mostrarForm.addEventListener("click", mostrar);
 }
 //Variables para la conexion
 var servidor;
@@ -44,9 +47,13 @@ function enviarSolicitud(){
 }
 
 function mostrar(){
-
+    var contedorForm = $("cont-formulario");
+    contedorForm.hidden = false;
+    console.log("mostrar");
 }
 
 function cerrar(){
-    
+    console.log("cerrar");
+    var contedorForm = $("cont-formulario");
+    contedorForm.hidden = true;
 }
