@@ -14,60 +14,73 @@
                 <!----------------------------- MOMBRE Y LOGO ----------------------------->
                 <div class="element-header-1">
                     <img src="./logo/logo.png" alt="">
-                    <a href="#">Primer Parcial</a>
+                    <a href="#">Sebastián Aguirre</a>
                 </div>
                 <!----------------------------- MENU ----------------------------->
                 <div class="element-header-2">
                     <nav class="menu">
                         <ul>
-                            <li><a href="#" id="mostrar">Mostrar</a></li>
-                            <li><a href="#experience"> Punto 1</a></li>
+                            <li><a href="#" id="mostrar">Primer Parcial</a></li>
+                            <!-- <li><a href="#experience"> Punto 1</a></li>
                             <li><a href="#academic"> Punto 2</a></li>
                             <li><a href="#skills"> Punto 3</a></li>
-                            <li><a href="#contact"> Punto 4</a></li>
+                            <li><a href="#contact"> Punto 4</a></li> -->
                         </ul>
                     </nav>
                 </div>   
             </header>
             <!----------------------------- MAIN ----------------------------->
             <main class="main">
+                <table>
+                    <thead>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Cuatrimestre</th>
+                        <th>Fecha de Final</th>
+                        <th>Turno</th>
+                    </thead>
+                    <tbody id="tBody">
+                        <!--InnerHtml-->
+                    </tbody>
+                </table>
+                <div id="cont-formulario" hidden>  
+                    <form action="" class="formulario">
+                        <input type="button" value="x" id="btnCerrar">
+                        <h3>Datos Materia</h3>
+                        <label for="">Nombre</label>
+                        <input type="text" class="input" id="textNombre">
+                        <label for="">Cuatrimestre</label>
+                        <select name="" id="selectCuatri">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        <label for="">Turno</label>
+                        <label for="">
+                            <label>mañana  </label><input type="radio" name="radio" id="mañana"/>
+                            <label>noche  </label><input type="radio" name="radio" id="noche"/>
+                        </label>
+                        <label for="">Fecha</label>
+                        <input type="date" name="" id="fecha">
+                            <input type="button" value="Modificar" id="btnModificar">
+                            <input type="button" value="Eliminar" id="btnEliminar">
+                     
+                    </form>
+                </div>
                 <div id="cont-spinner" hidden>
                     <div id="spinner"></div>
                 </div>
-                <div id="cont-formulario" >  
-                    <form action="" class="formulario">
-                        <input type="button" class="btnCerrar" id="btnCerrar" value="x">
-                        <h3>Formulario</h3>
-                        <label for="">Texto</label>
-                        <input type="text" class="input">
-                        <label for="">Numero</label>
-                        <input type="number" class="input">
-                        <label for="">Contraseña</label>
-                        <input type="password" class="input" id="pass">
-                        <input type="button" value="Boton" id="btn">
-                    </form>
-                </div>
                 <!-- <div> -->
-                    <table>
-                        <thead>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Telefono</th>
-                            <th>Fecha</th>
-                            <th>Accion</th>
-                        </thead>
-                        <tbody id="tbody">
-                            <!--InnerHtml-->
-                        </tbody>
-                    </table>
+                   
                 <!-- </div> -->
 
             </main>
             <!----------------------------- FOOTER ----------------------------->
             <footer class="footer">
-                <p>FOOTER</p>
+                <!-- <p>FOOTER</p> -->
             </footer>
         </div>
-        <script src="./js/scriptIndex.js"></script>
+        <script src="./js/script.js"></script>
     </body>
 </html>
