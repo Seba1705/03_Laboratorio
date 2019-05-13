@@ -14,14 +14,14 @@
 
 /*formulario*/
 
-#cont-form{
+#contFormulario{
     width: 100%;
     height: 100%;
     animation: aparecer 2s;
     position: absolute;
 }
 
-    .formulario{
+    .frmFormulario{
         display: flex;
         flex-flow: column wrap;
         align-items: center;
@@ -36,7 +36,7 @@
         transition: aparecer 2s linear infinite normal;
     }
 
-        .formulario input[type=number], input[type=text], input[type=password], textarea, select{
+        .frmFormulario input[type=number], input[type=text], input[type=password], textarea, select{
             width: 100%;
             padding: 5px;
             margin: 6px 0;
@@ -47,7 +47,7 @@
             font-size: 15px; 
         }
         
-        .formulario input[type=button] {
+        .frmFormulario input[type=button] {
             width: 100%;
             padding: 7px;
             margin: 4px 0;
@@ -60,7 +60,7 @@
             color: white;
         }
 
-        .formulario input[type=button]:hover {
+        .frmFormulario input[type=button]:hover {
             background-color: rgb(2, 87, 2);
             color: white;
         } 
@@ -83,7 +83,7 @@
             color: white;
         } 
 
-        .formulario label{
+        .frmFormulario label{
             text-align: center;
             width: 100%;
             padding: 5px;
@@ -119,7 +119,7 @@ table{
 
 /*Spinner*/
 
-#cont-spinner{
+#contSpinner{
     background-color: rgba(250, 240, 245, 0.9);
     height: 100%;
     width: 100%;

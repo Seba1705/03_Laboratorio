@@ -1,6 +1,6 @@
 //Declaro variables 
 var xhttp = new XMLHttpRequest(),
-    listaDeElemntos = [];
+    arrElemntos = [];
     idActual = "";
 
 //Buscar elemntos por id
@@ -12,25 +12,26 @@ function $(id){
 window.addEventListener("load", loadEvents);
 
 function loadEvents(){
-    var btnModificar = $("btnModificar");
+    var btnModificar = $("btnModificar"),
+        btnEliminar = $("btnEliminar");
     btnModificar.addEventListener("click", modificar);
-    var btnEliminar = $("btnEliminar");
     btnEliminar.addEventListener("click", eliminar);
     taerElementosDelServidor();
+    mostrarSpinner(false);
 }
 
 //Funcion Cargar Grilla
 function cargarGrilla(listaDeElemntosACargar){
-    var tCuerpo = $("tBody");
-    var cantidadDeElemtos = listaDeElemntos.length;
+    var tCuerpo = $("tBody"),
+        cantidadDeElemtos = arrElemntos.length;
     for(var i=0; i<cantidadDeElemtos;i++){
-        var row = document.createElement("tr");
-        var obj = listaDeElemntos[i];
-        var columns = Object.keys(obj);
+        var row = document.createElement("tr"),
+            obj = arrElemntos[i],
+            columns = Object.keys(obj);
         
         for(var j=0; j<columns.length; j++){
-            var cel = document.createElement("td");
-            var text = document.createTextNode(obj[columns[j]]);
+            var cel = document.createElement("td"),
+                text = document.createTextNode(obj[columns[j]]);
             cel.appendChild(text);
             row.appendChild(cel);
         }
@@ -49,8 +50,9 @@ function taerElementosDelServidor(){
     function callback(){
         if (xhttp.readyState === 4 && xhttp.status === 200){
             var respuestaDelServidor = xhttp.responseText;
-            listaDeElemntos = JSON.parse(respuestaDelServidor);
-            cargarGrilla(listaDeElemntos);
+            arrElemntos = JSON.parse(respuestaDelServidor);
+            cargarGrilla(arrElemntos);
+            mostrarSpinner(true);
         }
     }
 }
@@ -58,47 +60,96 @@ function taerElementosDelServidor(){
 //Funcion Que muesta los datos de una fila
 function abrirConDobleClick(e){
     e.preventDefault();
-    var contenedor = $("cont-form");
-    contenedor.hidden = false;
+    mostrarFomulario(false);
     idActual = event.target.parentNode.getAttribute('id').split("_")[1];
     var elemento = buscarPorId(idActual);
-    // console.log(elemento);
-    
+
     //Carga de datos
-    $("textNombre").value = elemento.nombre; //Nombre
+    $("txtNombre").value = elemento.nombre; //Nombre
     $("selectCuatri").value = elemento.cuatrimestre; //Cuatrimestre
-    var turno = $("noche");
+    $("selectCuatri").disabled = true;
+    var turno = $("radNoche");
     if(elemento.turno == "Noche"){ //Turno
         turno.checked = true;
     }
-    var fechaACargar = new Date(cambiarFecha(elemento.fechaFinal)); //Falta cargarlo en el input fecha
-    
+    $("dateFecha").value = cambiarFormatoFecha(elemento.fechaFinal);
 }
 
-//Funciones Eliminar y Modificar
-function eliminar(){
-
+//Funciones Modificar
+function modificar(e){
+    e.preventDefault();
+    mostrarSpinner(false);
+    xhttp.onreadystatechange = callback;
+    xhttp.open("POST", "http://localhost:3000/editar", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");   
+    var obj = crearObjetoModificado();
+    xhttp.send(JSON.stringify(obj));
+    function callback(){
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var respuestaDelServidorPost = JSON.parse(xhttp.responseText);
+            if(respuestaDelServidorPost.type == "ok"){
+                arrElemntos[idActual - 1] = obj;
+                var nuevaLista = arrElemntos;
+                mostrarSpinner(true);
+                mostrarFomulario(true);
+                //Actualizar grilla sin recargar
+            }   
+        }
+    }
 }
 
-function modificar(){
-
+//Crea el objeto que sera enviado por POst
+function crearObjetoModificado(){
+    var turno = $("radMañana").checked ? "Mañana" : "Noche";
+    var objAEnviar = {
+        "id": parseInt(idActual),
+        "nombre": $("txtNombre").value,
+        "cuatrimestre": parseInt($("selectCuatri").value),
+        "fechaFinal": validarFechaInput($("dateFecha").value),
+        "turno": turno
+    }
+    return objAEnviar;
 }
 
 //Funcion que busca po Id
 function buscarPorId(id)
 {
-    for(var i=0; i<listaDeElemntos.length; i++){
-        if(listaDeElemntos[i].id == id){
-            return listaDeElemntos[i];
+    for(var i=0; i<arrElemntos.length; i++){
+        if(arrElemntos[i].id == id){
+            return arrElemntos[i];
         }
     }
 }
 
 //Funcion para cambiar el formato a la fecha
-function cambiarFecha(fecha){
-    var dia = fecha[0] + fecha[1];
-    var mes = fecha[3] + fecha[4];
-    var anio = fecha[6] + fecha[7];
+function cambiarFormatoFecha(fecha){
+    var dia = fecha[0] + fecha[1],
+        mes = fecha[3] + fecha[4],
+        anio = fecha[6] + fecha[7] + fecha[8] + fecha[9],
+        retorno = `${anio}-${mes}-${dia}`;
+    return retorno;
+}
 
-    return (`${mes}/${dia}/${anio}`);
+//Cambia guines por barras
+function validarFechaInput(date){
+    var fecha = date.split("-"),
+        fechaFormateada = fecha[2]+"/"+fecha[1]+"/"+fecha[0];  
+    return fechaFormateada; 
+}
+
+//Funcion que muestra el Spinner
+function mostrarSpinner(estado){
+    var spinner = $("contSpinner");
+    spinner.hidden = estado;
+}
+
+//Mostrar Formualrio
+function mostrarFomulario(estado){
+    var contenedor = $("contFormulario");
+    contenedor.hidden = estado;
+}
+
+//Funcion eliminar
+function eliminar(){
+
 }
