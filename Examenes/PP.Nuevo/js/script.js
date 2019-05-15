@@ -84,6 +84,7 @@ function modificar(e){
     xhttp.setRequestHeader("Content-Type", "application/json");   
     var obj = crearObjetoModificado();
     xhttp.send(JSON.stringify(obj));
+    
     function callback(){
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var respuestaDelServidorPost = JSON.parse(xhttp.responseText);
@@ -150,6 +151,24 @@ function mostrarFomulario(estado){
 }
 
 //Funcion eliminar
-function eliminar(){
-
+function eliminar(e){
+    e.preventDefault();
+    mostrarSpinner(false);
+    xhttp.onreadystatechange = callback;
+    xhttp.open("POST", "http://localhost:3000/eliminar", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");   
+    var obj = { id : idActual};
+    xhttp.send(JSON.stringify(obj));
+    
+    function callback(){
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var respuestaDelServidorPost = JSON.parse(xhttp.responseText);
+            if(respuestaDelServidorPost.type == "ok"){
+                mostrarSpinner(true);
+                mostrarFomulario(true);
+                console.log("Eliminado");
+            }   
+        }
+    }
+    console.log("Eliminar");
 }
