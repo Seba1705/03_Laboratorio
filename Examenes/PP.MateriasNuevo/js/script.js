@@ -23,10 +23,10 @@ function loadEvents(){
 //Funcion Cargar Grilla
 function cargarGrilla(listaDeElemntosACargar){
     var tCuerpo = $("tBody"),
-        cantidadDeElemtos = arrElemntos.length;
+        cantidadDeElemtos = listaDeElemntosACargar.length;
     for(var i=0; i<cantidadDeElemtos;i++){
         var row = document.createElement("tr"),
-            obj = arrElemntos[i],
+            obj = listaDeElemntosACargar[i],
             columns = Object.keys(obj);
         
         for(var j=0; j<columns.length; j++){
