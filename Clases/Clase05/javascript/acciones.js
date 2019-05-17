@@ -26,6 +26,7 @@ function agregar(){
             var personas = JSON.parse(respuestaSeridor);
             for(var i=0; i<personas.length;i++){
                 var row = document.createElement("tr");
+                row.addEventListener("dblclick", cargar);
                 var obj = personas[i];
                 var columns = Object.keys(obj);
                 
@@ -54,4 +55,15 @@ function borrar(e){
    var filaAEliminar = e.target.parentNode.parentNode;
    filaAEliminar.parentNode.removeChild( filaAEliminar);
    
+}
+
+function cargar(event){
+
+    var hijos = event.target.parentNode.children;
+    console.log(hijos);
+    for(var i=0; i<hijos.length;i++){
+        console.log(hijos[i].innerHTML);
+        
+    }
+
 }

@@ -1,6 +1,7 @@
 //Declaro variables 
 var xhttp = new XMLHttpRequest(),
-    arrElemntos = [];
+    arrElemntos = [],
+    rowSeleccionada = null,
     idActual = "";
 
 //Buscar elemntos por id
@@ -61,6 +62,7 @@ function taerElementosDelServidor(){
 function abrirConDobleClick(e){
     e.preventDefault();
     mostrarFomulario(false);
+    rowSeleccionada = e.target.parentNode
     idActual = event.target.parentNode.getAttribute('id').split("_")[1];
     var elemento = buscarPorId(idActual);
 
@@ -88,13 +90,17 @@ function modificar(e){
     function callback(){
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var respuestaDelServidorPost = JSON.parse(xhttp.responseText);
+            
             if(respuestaDelServidorPost.type == "ok"){
                 arrElemntos[idActual - 1] = obj;
                 var nuevaLista = arrElemntos;
-                mostrarSpinner(true);
-                mostrarFomulario(true);
+                $("tBody").innerHTML = ""
+                cargarGrilla(nuevaLista);
+                
                 //Actualizar grilla sin recargar
             }   
+            mostrarSpinner(true);
+                mostrarFomulario(true);
         }
     }
 }
@@ -153,6 +159,7 @@ function mostrarFomulario(estado){
 //Funcion eliminar
 function eliminar(e){
     e.preventDefault();
+    var filaAEliminar = e.target.parentNode.parentNode;
     mostrarSpinner(false);
     xhttp.onreadystatechange = callback;
     xhttp.open("POST", "http://localhost:3000/eliminar", true);
@@ -164,11 +171,11 @@ function eliminar(e){
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var respuestaDelServidorPost = JSON.parse(xhttp.responseText);
             if(respuestaDelServidorPost.type == "ok"){
-                mostrarSpinner(true);
-                mostrarFomulario(true);
+                rowSeleccionada.parentNode.removeChild( rowSeleccionada);
                 console.log("Eliminado");
-            }   
+            }  
+            mostrarSpinner(true); 
+            mostrarFomulario(true);
         }
     }
-    console.log("Eliminar");
 }
