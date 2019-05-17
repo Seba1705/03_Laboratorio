@@ -10,7 +10,8 @@ var btnEliminar = $("btnEliminar"),
     idActual = "";
 
 window.addEventListener("load", loadEvents);
-    function loadEvents(){
+
+function loadEvents(){
     btnEliminar.addEventListener("click", eliminar);
     btnModificar.addEventListener("click", modificar);
     trarElemntosDelServidor();
@@ -57,12 +58,60 @@ function cargarGrilla(listaDeElemntosACargar){
     }
 }
 
-function abrirConDobleClick(){
+function abrirConDobleClick(e){
+    e.preventDefault();
+    mostrarFomulario(false);
 
+    idActual = event.target.parentNode.getAttribute('id').split("_")[1];
+    var personaAModificar = buscarPorId(idActual);
+    
+    $("txtNombre").value = personaAModificar.nombre; 
+    $("txtApellido").value = personaAModificar.apellido;
+    $("dateFecha").value = personaAModificar.fecha;
+    var sexo = $("radFamale");
+    if(personaAModificar.sexo == "Female"){ //Turno
+        sexo.checked = true;
+    }
 }
 
-function modificar(){
+function mostrarFomulario(estado){
+    var contenedor = $("contFormulario");
+    contenedor.hidden = estado;
+}
 
+function buscarPorId(id)
+{
+    for(var i=0; i<arrPersonas.length; i++){
+        if(arrPersonas[i].id == id){
+            return arrPersonas[i];
+        }
+    }
+}
+
+function modificar(e){
+    var sexo = $("radMale").checked ? "Male" : "Female";
+    var objModficado = {
+        "id":idActual,
+        "nombre":$("txtNombre").value,
+        "apellido":$("txtApellido").value,
+        "fecha":$("dateFecha").value,
+        "sexo":sexo
+    }
+    e.preventDefault();
+    mostrarSpinner(false);
+    xhttp.onreadystatechange = callback;
+    xhttp.open("POST","http://localhost:3000/editar", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send(JSON.stringify(objModficado));
+
+    function callback(){
+        if(xhttp.readyState == 4 && xhttp.status == 200){
+            var respuestaServidorPost = xhttp.responseText;
+            console.log(respuestaServidorPost);
+            mostrarSpinner(true);
+            mostrarFomulario(true);
+        }
+    }
 }
 
 function eliminar(){
