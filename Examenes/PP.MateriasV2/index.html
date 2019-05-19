@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Primer Parcial</title>
+</head>
+<body>
+    <div id="contSpinner" hidden>
+        <div id="spinner"></div>
+    </div>
+ 
+    <div id="contFormulario" hidden>
+        <form action="" class="frmFormulario">
+            <label for="">Nombre</label>
+            <input type="text" class="input" id="txtNombre">
+            <label for="">Cuatrimestre</label>
+            <select name="" id="selectCuatri" disabled>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <label for="">Turno</label>
+            <label for="">
+                <label>Mañana</label><input type="radio" name="radio" id="radMañana" checked/>
+                <label>Noche</label><input type="radio" name="radio" id="radNoche"/>
+            </label>
+            <label for="">Fecha</label>
+            <input type="date" name="" id="dateFecha" value="">
+            <input type="button" value="Modificar" id="btnModificar">
+            <input type="button" value="Eliminar" id="btnEliminar">
+        </form>
+    </div>
+  
+    <div class="container">
+        <table>
+            <thead>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Cuatrimestre</th>
+                <th>Fecha de Final</th>
+                <th>Turno</th>
+            </thead>
+            <tbody id="tBody">
+                <!--InnerHtml-->
+            </tbody>
+        </table>
+    </div>
+    <script src="./js/script.js"></script>
+</body>
+</html>
