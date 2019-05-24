@@ -1,10 +1,27 @@
 var filaSeccionada = null;
 
+function mostrarSpinner(){
+    $('#contSpinner').show();
+}
+
+function mostrarFormulario(){
+    $('#contFormulario').show();
+}
+
+function ocultarSpinner(){
+    $('#contSpinner').hide();
+}
+
+function ocultarFormulario(){
+    $('#contFormulario').hide();
+}
+
 $(document).ready(function(){
     $.get("http://localhost:3000/materias",function(data){
         cargarGrilla(data);
     }); 
-    $('#btnModificar').click(modificar);   
+    $('#btnModificar').click(modificar);
+    $('#btnEliminar').click(eliminar);   
 });
 
 function cargarGrilla(listaDeElemntosACargar){
@@ -42,36 +59,43 @@ function abrirConDobleClick(e){
         fechaModificada = fecha.split('/');
     $('#dateFecha').val(`${fechaModificada[2]}-${fechaModificada[1]}-${fechaModificada[0]}`);    
         
-    $('#contFormulario').show();
+    mostrarFormulario();
 }
 
-function modificar(e){
-    $('#contSpinner').show();
-    // //Cambio el formato de la fecha de '2019-05-17' a '17/05/2019'
-    // var fechaModificada = ($('dateFecha').value).split("-"),
-    //     turno = $("radMañana").checked ? "Mañana" : "Noche",
-    //     objetoAEnviar = {
-    //     id:parseInt(filaSeleccionada.getAttribute("id")),
-    //     nombre: $("txtNombre").value,
-    //     cuatrimestre: parseInt($("selectCuatri").value),
-    //     fechaFinal: `${fechaModificada[2]}/${fechaModificada[1]}/${fechaModificada[0]}`,
-    //     turno: turno 
-    // };
-    // xhttp.onreadystatechange = callback;
-    // xhttp.open("POST", "http://localhost:3000/editar", true);
-    // xhttp.setRequestHeader("Content-Type", "application/json");
-    // xhttp.send(JSON.stringify(objetoAEnviar));
-    
-    // function callback(){
-    //     if (xhttp.readyState == 4 && xhttp.status == 200) {
-    //         var respuesta = JSON.parse(xhttp.responseText);
-    //         if(respuesta.type == "ok"){
-    //             filaSeleccionada.children[1].textContent = objetoAEnviar.nombre;
-    //             filaSeleccionada.children[3].textContent = objetoAEnviar.fechaFinal;
-    //             filaSeleccionada.children[4].textContent = objetoAEnviar.turno;
-    //         }
-    //         mostrarSpinner(true);
-    //         mostrarFomulario(true);
-    //     }
-    // }
+function modificar(){
+    mostrarSpinner();
+    //Cambio el formato de la fecha de '2019-05-17' a '17/05/2019'
+    var fechaModificada = ($('#dateFecha').val()).split("-"),
+        turno = $("radMañana").checked ? "Mañana" : "Noche",
+        objetoAEnviar = {
+        id:parseInt(filaSeleccionada.getAttribute("id")),
+        nombre: $("#txtNombre").val(),
+        cuatrimestre: parseInt($("#selectCuatri").val()),
+        fechaFinal: `${fechaModificada[2]}/${fechaModificada[1]}/${fechaModificada[0]}`,
+        turno: turno 
+    };
+    $.post("http://localhost:3000/editar", objetoAEnviar, function(data){
+        // console.log(data.type)
+        if(data.type == "ok" ){
+            filaSeleccionada.children[1].textContent = objetoAEnviar.nombre;
+            filaSeleccionada.children[3].textContent = objetoAEnviar.fechaFinal;
+            filaSeleccionada.children[4].textContent = objetoAEnviar.turno;
+        }
+        ocultarFormulario();
+        ocultarSpinner();
+    });
+}
+
+function eliminar(){
+    mostrarSpinner();
+    var obj = { id : parseInt(filaSeleccionada.getAttribute("id"))};
+
+    $.post( "http://localhost:3000/eliminar", obj, function(data){
+        if(data.type == "ok"){
+            filaSeleccionada.parentNode.removeChild(filaSeleccionada);
+            console.log("Eliminado");
+        }
+        ocultarFormulario();
+        ocultarSpinner();
+    });
 }
