@@ -998,7 +998,7 @@ var datos =[
   // Retornar una array de strings (el nombre de los usarios de sexo femenino)
   lib.femaleUsers = function () {
       console.log("Female Users:");
-      return datos.filter(persona=>persona.gender == 'female').map(item=>item.name);
+      return datos.filter(persona=>persona.gender === 'female').map(item=>item.name);
   };
 
   // Retornar una array de strings (el email de los usarios de sexo masculino)
@@ -1030,18 +1030,28 @@ var datos =[
       var edadMayor = datos.reduce(function(edad,persona)
       {
           if(edad < persona.age)
-            edad = persona.age;
-            return edad;        
+              edad = persona.age;
+          return edad;        
       },0);
-      return datos.filter(persona => persona.age == edadMayor).map(item => ({name: item.name, age: item.age}))
+      return datos.filter(persona => persona.age == edadMayor).map(item => ({name: item.name, age: item.age}));
+      // return datos.reduce(function(maxAge, item){
+      //     if(maxAge.age < index.age){
+      //         maxAge.age = item.age;
+      //         maxAge.name = item.name;
+      //     }
+      //     return maxAge;
+      // }
+      // ,{age:0}); VERSION PROFESOR -> REVISAR
   };
 
   // Retornar el promedio de edad de los usuarios (number)
   lib.userAgeAverage = function () {
-      let avg = datos.reduce( function (sum, item)
-      {
-          return sum + item.age;
-      },0) / datos.length ;
+      // let avg = datos.reduce( function (sum, item)
+      // {
+      //     return sum + item.age;
+      // },0) / datos.length ;
+      let avg = datos.reduce((sum,item)=>sum + item.age, 0) / datos.length;
+
       console.log(`User Age Average: ${avg.toFixed(2)}`);
   };
 
