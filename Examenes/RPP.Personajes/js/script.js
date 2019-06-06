@@ -19,10 +19,17 @@ function createElementTr(data){
         tdLastname = document.createElement('td'),
         tdEstado = document.createElement('td'),
         img = document.createElement("img");
-    
+        inputFile = document.createElement("input");
+
     //Imagen
     $(img).attr("src", data['foto']);
+    $(img).attr("id", 'img' + data['id']);
+    $(img).click(mostrarInput);
+    $(inputFile).attr("type", 'file');
+    $(inputFile).attr("id", 'input' + data['id']);
+    $(inputFile).hide();
     tdImg.appendChild(img);
+    tdImg.appendChild(inputFile)
     //Nombre
     tdName.appendChild(document.createTextNode(data['nombre']));
     //Apellido
@@ -58,4 +65,9 @@ function mostrarSpinner(){
 
 function ocultarSpinner(){
     let spinner = $('#cont-spinner').hide()
+}
+
+function mostrarInput(e)
+{
+    $(e.target.parentNode.lastChild).show();
 }
