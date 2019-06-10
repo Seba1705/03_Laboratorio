@@ -27,6 +27,7 @@ function createElementTr(data){
     $(img).click(mostrarInput);
     $(inputFile).attr("type", 'file');
     $(inputFile).attr("id", 'input' + data['id']);
+    $(inputFile).change()
     $(inputFile).hide();
     tdImg.appendChild(img);
     tdImg.appendChild(inputFile)
@@ -69,5 +70,7 @@ function ocultarSpinner(){
 
 function mostrarInput(e)
 {
-    $(e.target.parentNode.lastChild).show();
+    $(e.target.parentNode.lastChild).animate({
+        width: 'toggle',
+    });
 }
