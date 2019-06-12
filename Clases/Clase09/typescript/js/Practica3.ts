@@ -6,6 +6,7 @@ var batimovil = {
     antibalas: true,
     pasajeros:4
 };
+//console.log(batimovil);
 
 var bumblebee = {
     carroceria: "Amarillo con negro",
@@ -16,7 +17,7 @@ var bumblebee = {
       console.log("Disparando");
     }
 };
-
+//console.log(bumblebee);
 
 // Villanos debe de ser un arreglo de objetos personalizados
 var villanos = [{
@@ -32,21 +33,34 @@ var villanos = [{
     edad: undefined,
     mutante: true
 }];
+//console.log(villanos);
 
 // Multiples tipos
 // cree dos tipos, uno para charles y otro para apocalipsis
-var charles = {
-    poder:"psiquico",
+type tipoCharles = {
+    poder : string,
+    estatura : number
+}
+var charles:tipoCharles = {
+    poder: "psiquico",
     estatura: 1.78
-};
+}; 
+//console.log(charles);
 
-var apocalipsis = {
+type tipoApocalipsis = {
+    lider: boolean,
+    miembros: string[]
+}
+var apocalipsis:tipoApocalipsis = {
     lider:true,
     miembros: ["Magneto","Tormenta","Psylocke","Angel"]
 }
+//console.log(apocalipsis);
 
 // Mystique, debe poder ser cualquiera de esos dos mutantes (charles o apocalipsis)
-var mystique;
+var mystique:any;
 
 mystique = charles;
+//console.log(mystique);
 mystique = apocalipsis;
+//console.log(mystique);

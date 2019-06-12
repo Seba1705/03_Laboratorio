@@ -2,11 +2,13 @@
 function sumar(a, b) {
     return a + b;
 }
+//console.log(sumar(5,9));
 var contar = function (heroes) {
     return heroes.length;
 };
+//console.log(contar('Hola mundo'));
 var superHeroes = ["Flash", "Arrow", "Superman", "Linterna Verde"];
-contar(superHeroes);
+//console.log(contar(superHeroes));
 //Parametros por defecto
 function llamarBatman(llamar) {
     if (llamar === void 0) { llamar = false; }
@@ -14,7 +16,7 @@ function llamarBatman(llamar) {
         console.log("Batiseñal activada");
     }
 }
-llamarBatman();
+//llamarBatman(true);
 // Rest?
 function unirheroes() {
     var personas = [];
@@ -23,6 +25,7 @@ function unirheroes() {
     }
     return personas.join(", ");
 }
+//console.log(unirheroes(superHeroes));
 // Tipo funcion
 function noHaceNada(numero, texto, booleano, arreglo) {
 }
