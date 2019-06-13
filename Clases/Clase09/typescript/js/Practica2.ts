@@ -4,12 +4,12 @@ function sumar( a:number, b:number ):number{
 }
 //console.log(sumar(5,9));
 
-var contar = function( heroes:any ):any{
+let contar = function( heroes:any ):any{
     return heroes.length;
 }
 //console.log(contar('Hola mundo'));
 
-var superHeroes:string[] = ["Flash", "Arrow", "Superman", "Linterna Verde"];
+let superHeroes:string[] = ["Flash", "Arrow", "Superman", "Linterna Verde"];
 //console.log(contar(superHeroes));
 
 //Parametros por defecto
@@ -32,4 +32,4 @@ function noHaceNada( numero, texto, booleano, arreglo ){
 }
 
 // Crear el tipo de funcion que acepte la funcion "noHaceNada"
-var noHaceNadaTampoco;
+let noHaceNadaTampoco;

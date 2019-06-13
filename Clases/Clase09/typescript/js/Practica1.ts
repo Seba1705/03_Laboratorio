@@ -1,20 +1,20 @@
 // Tipos
-var batman: string = "Bruce",
+let batman: string = "Bruce",
     superman: string = "Clark",
     existe: boolean = false;
 //console.log(batman,superman, existe);
 
 // Tuplas
-var parejaHeroes: [string,string] = [batman,superman],
+let parejaHeroes: [string,string] = [batman,superman],
     villano: [string,number,true] = ["Lex Lutor",5,true];
 //console.log(parejaHeroes, villano);
 
 // Arreglos
-var aliados: string[] = ["Mujer Maravilla","Acuaman","San", "Flash"];
+let aliados: string[] = ["Mujer Maravilla","Acuaman","San", "Flash"];
 //console.log(aliados);
 
 //Enumeraciones
-var fuerzaFlash: number = 5,
+let fuerzaFlash: number = 5,
     fuerzaSuperman: number = 100,
     fuerzaBatman: number = 1,
     fuerzaAcuaman: number = 0;
@@ -32,6 +32,6 @@ function pedir_ayuda(): void{
 //pedir_ayuda();
 
 // Aserciones de Tipo
-var poder:any = "100",
+let poder:any = "100",
     largoDelPoder: any = poder.length;
 //console.log( largoDelPoder );
