@@ -1,63 +1,63 @@
 
 //Map
-let nums = [1,2,3,4,5,6];
-let numSqrt =[];
+// let nums = [1,2,3,4,5,6];
+// let numSqrt =[];
 
-for(let i=0;i<nums.length;i++){
-    numSqrt[i] = nums[i]*nums[i];
-}
+// for(let i=0;i<nums.length;i++){
+//     numSqrt[i] = nums[i]*nums[i];
+// }
 
-console.log("Numero con foreach :",numSqrt);
+// console.log("Numero con foreach :",numSqrt);
 
-console.log("Numero con map: ",
-nums.map(
-function (num){
-    return num*num;
-}));
-console.log("Numeros con arrowfunction : ",nums.map((num,index) => num*index));
+// console.log("Numero con map: ",
+// nums.map(
+// function (num){
+//     return num*num;
+// }));
+// console.log("Numeros con arrowfunction : ",nums.map((num,index) => num*index));
 
 
 
 //Filter
 
-var numFiltered =[];
+// var numFiltered =[];
 
-let j=0;
-for(let i=0;i<nums.length;i++){
-    if(nums[i]>3){
-        numFiltered[j]= nums[i];     
-        j++;
-    }
-}
+// let j=0;
+// for(let i=0;i<nums.length;i++){
+//     if(nums[i]>3){
+//         numFiltered[j]= nums[i];     
+//         j++;
+//     }
+// }
 
-console.log("Numeros mayores a 3 : ",numFiltered);
+// console.log("Numeros mayores a 3 : ",numFiltered);
 
-console.log("Numeros mayores a 3 con filter :",
-nums.filter(function(num){
-    return num>3;
-}));
+// console.log("Numeros mayores a 3 con filter :",
+// nums.filter(function(num){
+//     return num>3;
+// }));
 
-console.log("Numeros mayeres a 3 con arrowfuntion: ",
-nums.filter(num=>num>3));
+// console.log("Numeros mayeres a 3 con arrowfuntion: ",
+// nums.filter(num=>num>3));
 
-//Reduce
-let total =0;
+// //Reduce
+// let total =0;
 
-for (let i=0;i<nums.length;i++){
-    total +=nums[i];
-}
+// for (let i=0;i<nums.length;i++){
+//     total +=nums[i];
+// }
 
-console.log("Sumatoria de numeros: ",total);
+// console.log("Sumatoria de numeros: ",total);
 
-var n  = nums.reduce(
-function(total,num){
+// var n  = nums.reduce(
+// function(total,num){
 	
-    return total+=num;
-}
-,
-0);
+//     return total+=num;
+// }
+// ,
+// 0);
 
-console.log("Sumatoria de numeros con reduce: ",n);
+// console.log("Sumatoria de numeros con reduce: ",n);
 
 
  

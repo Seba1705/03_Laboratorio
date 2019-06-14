@@ -1004,62 +1004,39 @@ var datos =[
   // Retornar una array de strings (el email de los usarios de sexo masculino)
   lib.maleUsersEmails = function () {
       console.log("Male Users Email:");
-      return datos.filter(persona=>persona.gender == 'male').map(item=>item.email);
+      return datos.filter(persona=>persona.gender === 'male').map(persona=>persona.email);
   };
 
-  // Retornar un array de objetos que solo contengan las claves name, email y age, 
-  // de todos los usuarios mayores que '25'
+  // Retornar un array de objetos que solo contengan las claves name, email y age, de todos los usuarios mayores que '25'
   lib.userOlderThan = function () {
       console.log("User Older Than:");
-      // return datos.filter(function(persona)
-      // {
-      //   return persona.age > 25;
-      // }).map(
-      //     function(item)
-      //     {
-      //       return {name: item.name,email: item.email, age: item.age};
-      //     })
-
-      return datos.filter(persona=>persona.age > 25).map(item=>({name: item.name, email: item.email, age: item.age}));
+      return datos.filter(persona=>persona.age > 25).map(persona=>({name: persona.name, email: persona.email, age: persona.age}));
   };
 
-  // Retornar un objeto que contenga solo el nombre y la edad (name y age) del usuario 
-  // mas grande.
+  // Retornar un objeto que contenga solo el nombre y la edad (name y age) del usuario mas grande.
   lib.olderUser = function () {
       console.log("Older User: ");
-      var edadMayor = datos.reduce(function(edad,persona)
-      {
-          if(edad < persona.age)
-              edad = persona.age;
-          return edad;        
-      },0);
-      return datos.filter(persona => persona.age == edadMayor).map(item => ({name: item.name, age: item.age}));
-      // return datos.reduce(function(maxAge, item){
-      //     if(maxAge.age < index.age){
-      //         maxAge.age = item.age;
-      //         maxAge.name = item.name;
-      //     }
-      //     return maxAge;
-      // }
-      // ,{age:0}); VERSION PROFESOR -> REVISAR
+          return datos.reduce((maxAge, item)=>{
+            if(maxAge.age < item.age){
+                maxAge.age = item.age;
+                maxAge.name = item.name;
+          }
+          return maxAge;
+      }
+      ,{age:0}); 
   };
 
   // Retornar el promedio de edad de los usuarios (number)
   lib.userAgeAverage = function () {
-      // let avg = datos.reduce( function (sum, item)
-      // {
-      //     return sum + item.age;
-      // },0) / datos.length ;
-      let avg = datos.reduce((sum,item)=>sum + item.age, 0) / datos.length;
-
-      console.log(`User Age Average: ${avg.toFixed(2)}`);
+      let promedio =  datos.reduce((sumador,persona)=>sumador + persona.age, 0) / datos.length;
+      return promedio.toFixed(2);
   };
 
   // Retornar el promedio de edad de los usuarios hombres (number)
   lib.userMaleAgeAverage = function () {
-      let avg = datos.filter(hombre=>hombre.gender == 'male').reduce(function(sum, item){
+      let avg = datos.filter(hombre=>hombre.gender === 'male').reduce(function(sum, item){
           return sum + item.age;
-      },0) / datos.filter(hombre=>hombre.gender == 'male').length ;
+      },0) / datos.filter(hombre=>hombre.gender === 'male').length ;
       console.log(`User Male Age Average: ${avg.toFixed(2)}`);
   };
 
@@ -1071,7 +1048,7 @@ var datos =[
       console.log(`User Female Age Average: ${avg.toFixed(2)}`);
   };
 
-  // Retornar un objeto  de etiquetas (tags)
+  // Retornar un objeto de etiquetas (tags)
   // cada property del objeto es el nombre de una etiqueta
   // y el value es la cantidad de usuarios que tienene esa etiqueta
   lib.tagCloud = function () {
