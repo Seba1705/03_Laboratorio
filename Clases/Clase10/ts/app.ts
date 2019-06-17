@@ -1,13 +1,16 @@
 var animales:Array<animal.Animal> = new Array(),
-    animalSeleccionado = "";
+    animalSeleccionado = $('#sel-animal').val();
     
-
 function agregar(){
-    let name = String($('#txtName').val());    
-    let animalNuevo = (animalSeleccionado == 'Perro') ? new animal.Perro(name) : new animal.Gato(name);
+    let name = String($('#txtName').val()),    
+        animalNuevo = (animalSeleccionado == 'Perro') ? new animal.Perro(name) : new animal.Gato(name);
     animales.push(animalNuevo);
-    // vaciar name
+    $('#txtName').val('');
 }   
+
+function guardarEnLocalStorage(){
+    
+}
 
 function modificar(){
     console.log('Modificar');
@@ -15,15 +18,34 @@ function modificar(){
 
 function eliminar(){
     console.log('Eliminar');
+    console.log(localStorage.getItem('Lista'));
 }
 
 function listar(){
-    console.log('Animales');
+    let tBody = $('#tBody');
+    tBody.html('');
     animales.forEach(element => {
-        console.log(element.hacerRuido());
+        let row = createTr(element);
+        tBody.append(row);
     });
 }
 
+function createTr(animal:animal.Animal):any{
+    let trName = document.createElement('td'),
+        trType = document.createElement('td'),
+        trRuido = document.createElement('td'),
+        row = document.createElement('tr');
+        
+    trName.appendChild(document.createTextNode(animal.Nombre));
+    trType.appendChild(document.createTextNode((animal.hacerRuido() === 'Guau!') ? 'Perro' : 'Gato'));
+    trRuido.appendChild(document.createTextNode(animal.hacerRuido()));
+
+    row.appendChild(trName);
+    row.appendChild(trType);
+    row.appendChild(trRuido);
+
+    return row;
+}
 
 $(function(){
     $('#btn-agregar').click(agregar);
@@ -35,3 +57,4 @@ $(function(){
         console.log(animalSeleccionado);
     })
 });
+
