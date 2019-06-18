@@ -1,4 +1,4 @@
-var animales:Array<animal.Animal> = new Array(),
+var animales:Array<animal.Animal> = (localStorage.length >= 0) ? cargarArrayDeAnimales() : new Array() ,
     animalSeleccionado = $('#sel-animal').val();
     
 function agregar(){
@@ -8,8 +8,8 @@ function agregar(){
     $('#txtName').val('');
 }   
 
-function guardarEnLocalStorage(){
-    
+function cargarArrayDeAnimales():Array<animal.Animal>{
+    return new Array<animal.Animal>();
 }
 
 function modificar(){
