@@ -1,9 +1,15 @@
 "use strict";
 var animales = (localStorage.length >= 0) ? cargarArrayDeAnimales() : new Array(), animalSeleccionado = $('#sel-animal').val();
 function agregar() {
-    var name = String($('#txtName').val()), animalNuevo = (animalSeleccionado == 'Perro') ? new animal.Perro(name) : new animal.Gato(name);
-    animales.push(animalNuevo);
-    $('#txtName').val('');
+    var name = String($('#txtName').val());
+    if (!!name) {
+        var animalNuevo = (animalSeleccionado == 'Perro') ? new animal.Perro(name) : new animal.Gato(name);
+        animales.push(animalNuevo);
+        $('#txtName').val('');
+    }
+    else {
+        console.log('Falta nombre');
+    }
 }
 function cargarArrayDeAnimales() {
     return new Array();
@@ -13,9 +19,9 @@ function modificar() {
 }
 function eliminar() {
     console.log('Eliminar');
-    console.log(localStorage.getItem('Lista'));
 }
 function listar() {
+    console.log('Listar');
     var tBody = $('#tBody');
     tBody.html('');
     animales.forEach(function (element) {

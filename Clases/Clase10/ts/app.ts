@@ -2,10 +2,14 @@ var animales:Array<animal.Animal> = (localStorage.length >= 0) ? cargarArrayDeAn
     animalSeleccionado = $('#sel-animal').val();
     
 function agregar(){
-    let name = String($('#txtName').val()),    
-        animalNuevo = (animalSeleccionado == 'Perro') ? new animal.Perro(name) : new animal.Gato(name);
-    animales.push(animalNuevo);
-    $('#txtName').val('');
+    let name = String($('#txtName').val());    
+    if(!!name){
+        let animalNuevo = (animalSeleccionado == 'Perro') ? new animal.Perro(name) : new animal.Gato(name);
+        animales.push(animalNuevo);
+        $('#txtName').val('');
+    }else{
+        console.log('Falta nombre');
+    }
 }   
 
 function cargarArrayDeAnimales():Array<animal.Animal>{
@@ -18,10 +22,10 @@ function modificar(){
 
 function eliminar(){
     console.log('Eliminar');
-    console.log(localStorage.getItem('Lista'));
 }
 
 function listar(){
+    console.log('Listar');
     let tBody = $('#tBody');
     tBody.html('');
     animales.forEach(element => {
