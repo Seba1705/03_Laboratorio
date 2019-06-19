@@ -1,11 +1,12 @@
 "use strict";
-var animales = new Array(), animalSeleccionado = $('#sel-animal').val();
+var animales = (localStorage.length >= 0) ? cargarArrayDeAnimales() : new Array(), animalSeleccionado = $('#sel-animal').val();
 function agregar() {
     var name = String($('#txtName').val()), animalNuevo = (animalSeleccionado == 'Perro') ? new animal.Perro(name) : new animal.Gato(name);
     animales.push(animalNuevo);
     $('#txtName').val('');
 }
-function guardarEnLocalStorage() {
+function cargarArrayDeAnimales() {
+    return new Array();
 }
 function modificar() {
     console.log('Modificar');
