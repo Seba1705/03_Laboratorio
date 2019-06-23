@@ -9,6 +9,5 @@ namespace Personas{
             this.apellido = apellido;
             this.edad = edad;
         }
-
     }
 }
