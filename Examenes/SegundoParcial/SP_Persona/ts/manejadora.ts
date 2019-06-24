@@ -22,19 +22,19 @@ function agregarEmpleado():void{
                                             String(horario.val()), 
                                             Number(legajo.val()));
     personas.push(empleado.toJson());
-    guardar();                                           
+    guardar();   
+    limpiarFormulario();                                        
 }
 
 function limpiarFormulario():void{
     $('#txtName').val('');
     $('#txtLastname').val('');
     $('#inputAge').val('');
-    $('#selHorario').val('');
     $('#legajo').val('');
 }
 
-function mostrarEmpleados(e:any):void{
-    e.preventDefault();
+function mostrarEmpleados(e?:any):void{
+    !!e && e.preventDefault();
     const tBody = $('#tBody');
     tBody.html('');
     personas.forEach(element => {
@@ -47,8 +47,8 @@ function mostrarEmpleados(e:any):void{
                 <td>${empleado.legajo}</td>
                 <td>${empleado.horario}</td>
                 <td>
-                    <a href="#" onClick="eliminar(${empleado.legajo})"><i class="fas fa-trash-alt mr-2"></i></a> 
-                    <a href="#" onClick="modificar(${empleado.legajo})"><i class="fas fa-edit ml-2"></i></a>
+                    <a href="#" onClick="eliminar(${personas.indexOf(element)})"><i class="fas fa-trash-alt mr-2"></i></a> 
+                    <a href="#" onClick="modificar(${personas.indexOf(element)})"><i class="fas fa-edit ml-2"></i></a>
                 </td>
             </tr>`
         );
@@ -61,7 +61,9 @@ function modificar(i:number):void{
 
 // Eliminar: Debe eliminar el empleado tanto de la tabla como del lugar de almacenamiento.
 function eliminar(i:number, e:any):void{
-    console.log(`Eliminar ${i}`);
+    personas.splice(i, 1);
+    guardar();
+    mostrarEmpleados();
 }
 
 function filtrarPorHorario():void{
@@ -72,18 +74,7 @@ function promedioEdadPorHorario():void{
 
 }
 
-function guardarEnLoalStorage(empleado:Personas.Empleado):void{
-  
-}
 
 const guardar = () => {
     localStorage.setItem('personas', JSON.stringify(personas));
-}
-
-const arrayObjetos = () => {
-    const retorno: any[] = [];
-    personas.forEach(element => {
-        retorno.push(JSON.parse(element));
-    });
-    return retorno;
 }

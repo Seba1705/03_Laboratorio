@@ -12,21 +12,21 @@ function agregarEmpleado() {
     var empleado = new Personas.Empleado(String(nombre.val()), String(apellido.val()), Number(edad.val()), String(horario.val()), Number(legajo.val()));
     personas.push(empleado.toJson());
     guardar();
+    limpiarFormulario();
 }
 function limpiarFormulario() {
     $('#txtName').val('');
     $('#txtLastname').val('');
     $('#inputAge').val('');
-    $('#selHorario').val('');
     $('#legajo').val('');
 }
 function mostrarEmpleados(e) {
-    e.preventDefault();
+    !!e && e.preventDefault();
     var tBody = $('#tBody');
     tBody.html('');
     personas.forEach(function (element) {
         var empleado = JSON.parse(element);
-        tBody.append("<tr>\n                <td>" + empleado.nombre + "</td>\n                <td>" + empleado.apellido + "</td>\n                <td>" + empleado.edad + "</td>\n                <td>" + empleado.legajo + "</td>\n                <td>" + empleado.horario + "</td>\n                <td>\n                    <a href=\"#\" onClick=\"eliminar(" + empleado.legajo + ")\"><i class=\"fas fa-trash-alt mr-2\"></i></a> \n                    <a href=\"#\" onClick=\"modificar(" + empleado.legajo + ")\"><i class=\"fas fa-edit ml-2\"></i></a>\n                </td>\n            </tr>");
+        tBody.append("<tr>\n                <td>" + empleado.nombre + "</td>\n                <td>" + empleado.apellido + "</td>\n                <td>" + empleado.edad + "</td>\n                <td>" + empleado.legajo + "</td>\n                <td>" + empleado.horario + "</td>\n                <td>\n                    <a href=\"#\" onClick=\"eliminar(" + personas.indexOf(element) + ")\"><i class=\"fas fa-trash-alt mr-2\"></i></a> \n                    <a href=\"#\" onClick=\"modificar(" + personas.indexOf(element) + ")\"><i class=\"fas fa-edit ml-2\"></i></a>\n                </td>\n            </tr>");
     });
 }
 function modificar(i) {
@@ -34,21 +34,14 @@ function modificar(i) {
 }
 // Eliminar: Debe eliminar el empleado tanto de la tabla como del lugar de almacenamiento.
 function eliminar(i, e) {
-    console.log("Eliminar " + i);
+    personas.splice(i, 1);
+    guardar();
+    mostrarEmpleados();
 }
 function filtrarPorHorario() {
 }
 function promedioEdadPorHorario() {
 }
-function guardarEnLoalStorage(empleado) {
-}
 var guardar = function () {
     localStorage.setItem('personas', JSON.stringify(personas));
-};
-var arrayObjetos = function () {
-    var retorno = [];
-    personas.forEach(function (element) {
-        retorno.push(JSON.parse(element));
-    });
-    return retorno;
 };
