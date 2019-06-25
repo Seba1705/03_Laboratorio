@@ -1,10 +1,14 @@
 
-let personas:string[] = (localStorage.getItem('personas') != null) ? JSON.parse(localStorage.getItem('personas')) : [];
+let personas:string[] = (localStorage.getItem('personas') != null) ? JSON.parse(localStorage.getItem('personas')) : [],
+    indiceSeleccionado:number;
 
 $(function(){
-    $('#btnAgregar').click(agregarEmpleado);
+    $('#btnAgregar').on('click', agregarEmpleado);
+    $('#btnModificar').hide();
+    $('#btnModificar').click(guardarEmpleado);
     $('#btnCancelar').click(limpiarFormulario);
     $('#mostrar').click(mostrarEmpleados);
+    $('#btnFiltrar').click(filtrarPorHorario);
 })
 
 // Agregar: Ɵene que agregar un nuevo empleado y almacenarlo.
@@ -31,8 +35,10 @@ function limpiarFormulario():void{
     $('#txtLastname').val('');
     $('#inputAge').val('');
     $('#legajo').val('');
+    $('#titulo').html('Alta Empleado');
 }
 
+// Mostrar: Debe listar todos los empleados almacenados en una tabla con la opción de Eliminar y Modificar.
 function mostrarEmpleados(e?:any):void{
     !!e && e.preventDefault();
     const tBody = $('#tBody');
@@ -55,11 +61,43 @@ function mostrarEmpleados(e?:any):void{
     });
 }
 
+// Modificar: debe completar todos los datos del empleado en los inputs, cambiar el ơtulo y el name del botón. Al presionar el botón Modificar debe modificar los datos
 function modificar(i:number, e?:any):void{
     !!e && e.preventDefault();
-    console.log(`Modificar ${i}`);
+    indiceSeleccionado = i;
+    $('#titulo').html('Modificar Empleado');
     $('#btnAgregar').hide();
     $('#btnModificar').show();
+    //Persona a modificar
+    let personaAModificar = JSON.parse(personas[i]);
+    //Cargo variables en el formulario
+    $('#txtName').val(personaAModificar.nombre);
+    $('#txtLastname').val(personaAModificar.apellido);
+    $('#inputAge').val(personaAModificar.edad);
+    $('#legajo').val(personaAModificar.legajo);
+    $('#selHorario').val(personaAModificar.horario);
+}
+
+function guardarEmpleado(e?:any):void{
+    $('#tBody').html('');
+    !!e && e.preventDefault();
+    let nombre = $('#txtName'),
+        apellido = $('#txtLastname'),
+        edad = $('#inputAge'),
+        horario = $('#selHorario'),
+        legajo = $('#legajo');
+
+    //Empleado modificado
+    let empleadoModificado = new Personas.Empleado( String(nombre.val()), 
+                                                    String(apellido.val()), 
+                                                    Number(edad.val()), 
+                                                    String(horario.val()), 
+                                                    Number(legajo.val()));
+    personas[indiceSeleccionado] = empleadoModificado.toJson();
+    $('#btnAgregar').show();
+    $('#btnModificar').hide();
+    guardar();
+    limpiarFormulario();
 }
 
 // Eliminar: Debe eliminar el empleado tanto de la tabla como del lugar de almacenamiento.
@@ -69,15 +107,40 @@ function eliminar(i:number, e:any):void{
     mostrarEmpleados();
 }
 
+// Filtrar por Horario: debe abrir un modal de bootstrap y permiƟr seleccionar un horario. Al presionar Filtrar debe realizar un filter sobre la lista de empleados dependiendo del horario seleccionado en el input.
 function filtrarPorHorario():void{
-
+    let horario = $('#horarioModal').val(),
+        objetos = convertirAObjetos(),
+        tBody = $('#tBody'),
+        filtrados = objetos.filter(element => element.horario === horario);
+    tBody.html('');
+    filtrados.forEach(empleado => {
+        tBody.append(
+            `<tr>
+                <td>${empleado.nombre}</td>
+                <td>${empleado.apellido}</td>
+                <td>${empleado.edad}</td>
+                <td>${empleado.legajo}</td>
+                <td>${empleado.horario}</td>
+                <td>------</td>
+            </tr>`
+        );
+    });
 }
 
 function promedioEdadPorHorario():void{
-
+    
 }
 
-
+//Guarda el array en el localStorage
 const guardar = () => {
     localStorage.setItem('personas', JSON.stringify(personas));
+}
+
+function convertirAObjetos():any{
+    let salida:Personas.Empleado[] =  [];
+    personas.forEach(element =>{
+        salida.push(JSON.parse(element));
+    });
+    return salida;
 }
