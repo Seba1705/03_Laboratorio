@@ -1,5 +1,5 @@
 
-let personas:string[] = localStorage.length > 0 ? JSON.parse(localStorage.getItem('personas')) : [];
+let personas:string[] = (localStorage.getItem('personas') != null) ? JSON.parse(localStorage.getItem('personas')) : [];
 
 $(function(){
     $('#btnAgregar').click(agregarEmpleado);
@@ -55,8 +55,11 @@ function mostrarEmpleados(e?:any):void{
     });
 }
 
-function modificar(i:number):void{
+function modificar(i:number, e?:any):void{
+    !!e && e.preventDefault();
     console.log(`Modificar ${i}`);
+    $('#btnAgregar').hide();
+    $('#btnModificar').show();
 }
 
 // Eliminar: Debe eliminar el empleado tanto de la tabla como del lugar de almacenamiento.

@@ -1,5 +1,5 @@
 "use strict";
-var personas = localStorage.length > 0 ? JSON.parse(localStorage.getItem('personas')) : [];
+var personas = (localStorage.getItem('personas') != null) ? JSON.parse(localStorage.getItem('personas')) : [];
 $(function () {
     $('#btnAgregar').click(agregarEmpleado);
     $('#btnCancelar').click(limpiarFormulario);
@@ -29,8 +29,11 @@ function mostrarEmpleados(e) {
         tBody.append("<tr>\n                <td>" + empleado.nombre + "</td>\n                <td>" + empleado.apellido + "</td>\n                <td>" + empleado.edad + "</td>\n                <td>" + empleado.legajo + "</td>\n                <td>" + empleado.horario + "</td>\n                <td>\n                    <a href=\"#\" onClick=\"eliminar(" + personas.indexOf(element) + ")\"><i class=\"fas fa-trash-alt mr-2\"></i></a> \n                    <a href=\"#\" onClick=\"modificar(" + personas.indexOf(element) + ")\"><i class=\"fas fa-edit ml-2\"></i></a>\n                </td>\n            </tr>");
     });
 }
-function modificar(i) {
+function modificar(i, e) {
+    !!e && e.preventDefault();
     console.log("Modificar " + i);
+    $('#btnAgregar').hide();
+    $('#btnModificar').show();
 }
 // Eliminar: Debe eliminar el empleado tanto de la tabla como del lugar de almacenamiento.
 function eliminar(i, e) {
