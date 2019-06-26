@@ -40,6 +40,7 @@ function limpiarFormulario():void{
 
 // Mostrar: Debe listar todos los empleados almacenados en una tabla con la opción de Eliminar y Modificar.
 function mostrarEmpleados(e?:any):void{
+    $('#thAccion').show();
     !!e && e.preventDefault();
     const tBody = $('#tBody');
     tBody.html('');
@@ -114,6 +115,7 @@ function filtrarPorHorario():void{
         tBody = $('#tBody'),
         filtrados = objetos.filter(element => element.horario === horario);
     tBody.html('');
+    $('#thAccion').hide();
     filtrados.forEach(empleado => {
         tBody.append(
             `<tr>
@@ -122,12 +124,12 @@ function filtrarPorHorario():void{
                 <td>${empleado.edad}</td>
                 <td>${empleado.legajo}</td>
                 <td>${empleado.horario}</td>
-                <td>------</td>
             </tr>`
         );
     });
 }
 
+// Promedio por Horario: Debe abrir un modal de bootstrap y permiƟr seleccionar un horario. Al presionar Promediar debe realizar un reduce sobre la lista de empleados dependiendo del horario seleccionado en el input y mostrar el resultado en un modal.
 function promedioEdadPorHorario():void{
     
 }
@@ -144,3 +146,4 @@ function convertirAObjetos():any{
     });
     return salida;
 }
+
