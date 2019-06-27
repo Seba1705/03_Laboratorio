@@ -7,6 +7,7 @@ $(function () {
     $('#btnCancelar').click(limpiarFormulario);
     $('#mostrar').click(mostrarEmpleados);
     $('#btnFiltrar').click(filtrarPorHorario);
+    $('#btnPromediar').click(promedioEdadPorHorario);
 });
 // Agregar: Ɵene que agregar un nuevo empleado y almacenarlo.
 function agregarEmpleado() {
@@ -80,6 +81,11 @@ function filtrarPorHorario() {
 }
 // Promedio por Horario: Debe abrir un modal de bootstrap y permiƟr seleccionar un horario. Al presionar Promediar debe realizar un reduce sobre la lista de empleados dependiendo del horario seleccionado en el input y mostrar el resultado en un modal.
 function promedioEdadPorHorario() {
+    var horario = $('#horarioModalReduce').val(), objetos = convertirAObjetos(), valor = objetos.filter(function (empleado) { return empleado.horario === horario; }).reduce(function (sumador, item) {
+        return sumador + item.edad;
+    }, 0) / objetos.filter(function (empleado) { return empleado.horario === horario; }).length;
+    console.log(valor);
+    // $('#modalPromedioFinal').html(String(valor.toFixed(2)));
 }
 //Guarda el array en el localStorage
 var guardar = function () {

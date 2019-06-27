@@ -22,6 +22,7 @@ $(function(){
     $('#btn-modificar').click(modificar);
     $('#btn-eliminar').click(eliminar);
     $('#btn-cancelar').click(cancelar);
+    $('#btn-filtrar').click(filtrar);
 });
 
 
@@ -39,4 +40,8 @@ function eliminar(){
 
 function cancelar(){
     console.log('Cancelar');
+}
+
+function filtrar(){
+    console.log('Filtrar');
 }
