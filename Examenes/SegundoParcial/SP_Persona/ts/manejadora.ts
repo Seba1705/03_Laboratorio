@@ -10,6 +10,7 @@ $(function(){
     $('#mostrar').click(mostrarEmpleados);
     $('#btnFiltrar').click(filtrarPorHorario);
     $('#btnPromediar').click(promedioEdadPorHorario);
+    $('#nombreApellido').click(mapear);
 })
 
 // Agregar: Ɵene que agregar un nuevo empleado y almacenarlo.
@@ -42,6 +43,9 @@ function limpiarFormulario():void{
 // Mostrar: Debe listar todos los empleados almacenados en una tabla con la opción de Eliminar y Modificar.
 function mostrarEmpleados(e?:any):void{
     $('#thAccion').show();
+    $('#thEdad').show();
+    $('#thHorario').show();
+    $('#thLegajo').show();
     !!e && e.preventDefault();
     const tBody = $('#tBody');
     tBody.html('');
@@ -155,3 +159,26 @@ function convertirAObjetos():any{
     return salida;
 }
 
+//Mapear
+function mapear(){
+    console.log('Mapear');
+    $('#thEdad').hide();
+    $('#thHorario').hide();
+    $('#thLegajo').hide();
+    let objetos = convertirAObjetos(),
+        tBody = $('#tBody'),
+        filtrados = objetos.map(empleado => ({nombre: empleado.nombre, apellido: empleado.apellido}));
+    tBody.html('');
+    filtrados.forEach(element => {
+        tBody.append(
+            `<tr>
+                <td>${element.nombre}</td>
+                <td>${element.apellido}</td>
+                <td>
+                    <a href="#" onClick="eliminar(${personas.indexOf(element)})"><i class="fas fa-trash-alt mr-2"></i></a> 
+                    <a href="#" onClick="modificar(${personas.indexOf(element)})"><i class="fas fa-edit ml-2"></i></a>
+                </td>
+            </tr>`
+        );
+    });
+}
