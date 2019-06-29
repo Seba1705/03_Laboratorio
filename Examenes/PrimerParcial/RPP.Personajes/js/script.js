@@ -1,4 +1,4 @@
-$(document).ready(function(){
+zz$(document).ready(function(){
     mostrarSpinner();
     $.get('http://localhost:3000/personajes', function(data, status){
         if(status === 'success'){
