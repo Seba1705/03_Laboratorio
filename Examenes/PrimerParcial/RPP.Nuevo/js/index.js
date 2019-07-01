@@ -14,23 +14,22 @@ const cargarGrilla = (data) => {
 const crearFila = (objeto) => {
     const   fila = document.createElement('tr');
     $(fila).attr('id', `fila-${objeto['id']}`);
-    fila.appendChild(crearColumnaImg(crearImagen(objeto['id'], objeto['foto'])));
+    fila.appendChild(crearColumnaImg(objeto['id'], objeto['foto']));
     fila.appendChild(crearColumna(crearTexto(objeto['nombre'])));
     fila.appendChild(crearColumna(crearTexto(objeto['apellido'])));
     fila.appendChild(crearColumna(crearSelect(objeto['estado'])));
     return fila;
 };
 
-const crearColumnaImg = (element) => {
+const crearColumnaImg = (id, source) => {
     const columa = document.createElement('td');
-    columa.appendChild(element);
-    columa.appendChild(crearInputFile());
+    columa.appendChild(crearImagen(source));
+    columa.appendChild(crearInputFile(id));
     return columa;
 };
 
-const crearImagen = (id, source) => {
+const crearImagen = (source) => {
     const etiquetaImg = document.createElement('img');
-    $(etiquetaImg).attr('id', id);
     $(etiquetaImg).attr('src', source);
     $(etiquetaImg).click(mostrarInputFile);
     return etiquetaImg;
@@ -40,16 +39,18 @@ const mostrarInputFile = (e) => {
     $(e.target.parentNode.lastChild).toggle(600);
 }
 
-const crearInputFile = () => {
+const crearInputFile = (id) => {
     const inputFile = document.createElement('input');
+    $(inputFile).attr('id', id);
     $(inputFile).attr("type", "file");
     $(inputFile).change(modificarFoto);
     $(inputFile).hide();
     return inputFile;
 };
 
-const modificarFoto = () => {
-    console.log('Modificar foto');
+const modificarFoto = (e) => {
+    console.log('Modificar foto' + e.target.id);
+    
 };
 
 const crearColumna = (element) => {
