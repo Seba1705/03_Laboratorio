@@ -1,14 +1,23 @@
 $(() => {
+    mostrarSpinner();
     $.get('http://localhost:3000/personajes', (data, status) =>{
-        status === 'success' && cargarGrilla(data);
+        if(status === 'success'){
+            // ocultarSpinner();    
+            cargarGrilla(data);
+        }
     });
 });
+
+const mostrarSpinner = () => $('#contenedor-spinner').show();
+
+const ocultarSpinner = () => $('#contenedor-spinner').hide();
 
 const cargarGrilla = (data) => {
     const tabla = $('#tabla');
     data.forEach(element => {
         tabla.append(crearFila(element));
     });
+    
 };
 
 const crearFila = (objeto) => {
@@ -23,14 +32,15 @@ const crearFila = (objeto) => {
 
 const crearColumnaImg = (id, source) => {
     const columa = document.createElement('td');
-    columa.appendChild(crearImagen(source));
+    columa.appendChild(crearImagen(id,source));
     columa.appendChild(crearInputFile(id));
     return columa;
 };
 
-const crearImagen = (source) => {
+const crearImagen = (id,source) => {
     const etiquetaImg = document.createElement('img');
     $(etiquetaImg).attr('src', source);
+    $(etiquetaImg).attr('id', `img-${id}`);
     $(etiquetaImg).click(mostrarInputFile);
     return etiquetaImg;
 };
@@ -43,14 +53,13 @@ const crearInputFile = (id) => {
     const inputFile = document.createElement('input');
     $(inputFile).attr('id', id);
     $(inputFile).attr("type", "file");
-    $(inputFile).change(modificarFoto);
+    $(inputFile).change(editarFoto);
     $(inputFile).hide();
     return inputFile;
 };
 
-const modificarFoto = (e) => {
-    console.log('Modificar foto' + e.target.id);
-    
+const editarFoto = () => {
+
 };
 
 const crearColumna = (element) => {
@@ -73,6 +82,16 @@ const crearSelect = (element) => {
 };
 
 const modificarEstado = e => {
-    console.log('Modificar estado');
+    mostrarSpinner();
+    let id = e.target.parentNode.parentNode.id.split('fila-')[1],
+        estado = $(e.target).val();
+    $.post('http://localhost:3000/editarEstado',  
+    { id : id, estado : estado },               
+    (data, status) => {                         
+        if(status === 'success'){
+            console.log(data);
+            ocultarSpinner();
+        }
+    });
 };
 

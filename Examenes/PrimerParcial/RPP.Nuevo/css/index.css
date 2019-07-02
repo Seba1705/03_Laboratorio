@@ -2,3 +2,86 @@
     padding: 0;
     margin: 0;
 }
+
+.container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+}
+
+/********************************** TABLA **********************************/
+
+table{
+    width: 100%;
+    border-collapse: collapse; /*sin bordes entre los elementos internos*/
+}
+
+th, td{
+    text-align: center;
+    padding: 10px;
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+th{
+    background:#252932;
+    color: #fff;
+    font: bold;
+}
+
+/* IMAGEN */
+
+img{
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+}
+
+/********************************** SPINNER **********************************/
+
+#contenedor-spinner{
+    background-color: rgba(250, 240, 245, 0.9);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    transition: all 1s ease;
+    z-index: 10000;
+}
+
+    #spinner{
+        border: 15px solid #ccc;
+        border-top-color: #252932;
+        border-top-style: groove;
+        height: 100px;
+        width: 100px;
+        border-radius: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        animation: girar 1.5s linear infinite;
+    }
+
+    @keyframes girar{
+        from{ transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+    }
+
+/********************************** SELECT   **********************************/
+
+select{
+    width: 50%;
+    padding: 5px;
+    margin: 6px 0;
+    display: inline-block;
+    border: 1px solid #b8b3b3;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px; 
+}
