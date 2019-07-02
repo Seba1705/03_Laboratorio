@@ -17,7 +17,7 @@ const cargarGrilla = (data) => {
     data.forEach(element => {
         tabla.append(crearFila(element));
     });
-    
+    ocultarSpinner();
 };
 
 const crearFila = (objeto) => {
@@ -59,7 +59,16 @@ const crearInputFile = (id) => {
 };
 
 const editarFoto = () => {
-
+    // if(this.files && this.files[0]){
+    //     mostrarSpinner();
+    //     let idFoto = event.target.id,
+    //         fReader= new FileReader();
+    //    fReader.addEventListener('load', e => {
+            
+    //         $('#img-'+idFoto).attr("src",e.target.result);
+    //    });
+    //    fReader.readAsDataURL(this.files[0]);
+    // }
 };
 
 const crearColumna = (element) => {
@@ -89,7 +98,6 @@ const modificarEstado = e => {
     { id : id, estado : estado },               
     (data, status) => {                         
         if(status === 'success'){
-            console.log(data);
             ocultarSpinner();
         }
     });
