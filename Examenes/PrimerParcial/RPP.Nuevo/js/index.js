@@ -2,8 +2,8 @@ $(() => {
     mostrarSpinner();
     $.get('http://localhost:3000/personajes', (data, status) =>{
         if(status === 'success'){
-            // ocultarSpinner();    
             cargarGrilla(data);
+            ocultarSpinner();
         }
     });
 });
@@ -17,7 +17,6 @@ const cargarGrilla = (data) => {
     data.forEach(element => {
         tabla.append(crearFila(element));
     });
-    ocultarSpinner();
 };
 
 const crearFila = (objeto) => {
@@ -51,25 +50,28 @@ const mostrarInputFile = (e) => {
 
 const crearInputFile = (id) => {
     const inputFile = document.createElement('input');
+    $(inputFile).change(function(){     
+        if (this.files && this.files[0]) {
+            mostrarSpinner();
+            let fReader = new FileReader();
+            fReader.addEventListener("load", function(e) {
+                let objeto = { id: id, foto : e.target.result};
+                cambiarFotoPost(objeto);
+                $(`#img-${id}`).attr("src",e.target.result);
+            }); 
+            fReader.readAsDataURL( this.files[0] );
+        }
+    });
     $(inputFile).attr('id', id);
     $(inputFile).attr("type", "file");
-    $(inputFile).change(editarFoto);
+   
     $(inputFile).hide();
     return inputFile;
 };
 
-const editarFoto = () => {
-    // if(this.files && this.files[0]){
-    //     mostrarSpinner();
-    //     let idFoto = event.target.id,
-    //         fReader= new FileReader();
-    //    fReader.addEventListener('load', e => {
-            
-    //         $('#img-'+idFoto).attr("src",e.target.result);
-    //    });
-    //    fReader.readAsDataURL(this.files[0]);
-    // }
-};
+const cambiarFotoPost = objeto => {
+    $.post("http://localhost:3000/editarFoto", objeto, (data, status) => status === 'success' && ocultarSpinner());
+}
 
 const crearColumna = (element) => {
     const columa = document.createElement('td');
@@ -96,10 +98,6 @@ const modificarEstado = e => {
         estado = $(e.target).val();
     $.post('http://localhost:3000/editarEstado',  
     { id : id, estado : estado },               
-    (data, status) => {                         
-        if(status === 'success'){
-            ocultarSpinner();
-        }
-    });
+    (data, status) =>  status === 'success' && ocultarSpinner());                        
 };
 
