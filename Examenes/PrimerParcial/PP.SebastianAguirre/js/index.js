@@ -1,6 +1,10 @@
+const urlGet = 'http://localhost:3000/personajes',
+      urlPostSelect = 'http://localhost:3000/editarEstado',
+      urlPostImage = 'http://localhost:3000/editarFoto';  
+
 $(() => {
     mostrarSpinner();
-    $.get('http://localhost:3000/personajes', (data, status) => status === 'success' && cargarGrilla(data));
+    $.get(urlGet, (data, status) => status === 'success' && cargarGrilla(data));
 });
 
 const mostrarSpinner = () => $('#contenedor-spinner').show();
@@ -61,7 +65,7 @@ const crearInputFile = id => {
     return inputFile;
 };
 
-const cambiarFotoPost = objeto => $.post( "http://localhost:3000/editarFoto", objeto, (data, status) => status === 'success' && ocultarSpinner() );
+const cambiarFotoPost = objeto => $.post( urlPostImage, objeto, (data, status) => status === 'success' && ocultarSpinner() );
     
 const crearColumna = element => {
     const columa = document.createElement('td');
@@ -82,9 +86,8 @@ const crearSelect = element => {
 const modificarEstado = e => {
     mostrarSpinner();
     let id = e.target.parentNode.parentNode.id.split('fila-')[1],
-        estado = $(e.target).val();
-    $.post('http://localhost:3000/editarEstado',  
-    { id : id, estado : estado },               
-    (data, status) =>  status === 'success' && ocultarSpinner());                        
+        estado = $(e.target).val(),
+        objeto = { id : id, estado : estado }
+    $.post( urlPostSelect, objeto, (data, status) =>  status === 'success' && ocultarSpinner() );                        
 };
 
