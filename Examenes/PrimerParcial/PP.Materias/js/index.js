@@ -1,6 +1,6 @@
 const urlGet = 'http://localhost:3000/materias',
       urlPostSelect = 'http://localhost:3000/editarEstado',
-      urlPostImage = 'http://localhost:3000/editarFoto';
+      urlPostMofificar = 'http://localhost:3000/editar';
 let filaSeleccionada = '';  
 
 $(() => {
@@ -63,9 +63,33 @@ const parsearFecha = fecha => {
 }
 
 const modificar = e => {
-    
-
+    mostrarSpinner();
+    let objeto = {
+        id : $(`#${filaSeleccionada}`).attr('id'),
+        nombre : $('#nombre').val(),
+        cuatrimestre : $('#cuatrimestre').val(),
+        fechaFinal : fechaToString($('#fecha').val()), 
+        turno : $('#turno-noche').attr('checked') ? 'Noche' : 'Mañana'
+    }
+    $.post(urlPostMofificar, objeto, (data, status) => { 
+        data.type === 'ok' && modificarGrilla(objeto);
+    })
+    ocultarFormulario();
 }
 
-const eliminar = () => console.log('Eliminar');
+const modificarGrilla = element => {
+    
+    ocultarSpinner();
+}
+
+const fechaToString = fecha => {
+    let parts = fecha.split('-');
+    return (`${parts[2]}/${parts[1]}/${parts[0]}`);
+}
+
+const eliminar = () => {
+    let fila = $(`#${filaSeleccionada}`);
+    console.log(fila.html())
+
+};
 
