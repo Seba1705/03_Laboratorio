@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./js/index.js"></script>
+</head>
+<body>
+    <!-- <div id="contenedor-spinner">
+        <div id="spinner"></div>
+    </div> -->
+    <div id="contenedor-formulario">
+        <form action="" class="formulario">
+            <section>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="" id="nombre">
+            </section>
+            
+            <section>
+                <label for="cuatrimestre">Cuatrimestre</label>
+                <select name="cuatri" id="cuatrimestre" disabled>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </section>
+           <section>
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha">
+           </section>
+            <section>
+                <label for="">Turno</label>
+                <section>
+                    <label for="turno-mañana">Mañana</label>
+                    <input type="radio" name="turno" id="turno-mañana" checked>
+                    <label for="turno-noche">Noche</label>
+                    <input type="radio" name="turno" id="turno-noche">
+                </section>
+            </section>
+            <input type="button" value="Modificar" id="btn-modificar">
+            <input type="button" value="Eliminar" id="btn-eliminar">
+        </form>
+    </div>
+    <div class="contenedor">
+        <table>
+            <thead>
+                <th>Nombre</th>
+                <th>Cuatrimestre</th>
+                <th>Fecha</th>
+                <th>Turno</th>       
+            </thead>
+            <tbody id="tabla">
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
