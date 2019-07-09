@@ -1,5 +1,5 @@
 const urlGet = 'http://localhost:3000/materias',
-      urlPostSelect = 'http://localhost:3000/editarEstado',
+      urlPostEliminar = 'http://localhost:3000/eliminar',
       urlPostMofificar = 'http://localhost:3000/editar';
 let filaSeleccionada = '';  
 
@@ -39,9 +39,9 @@ const crearFila = objeto => {
 };
 
 const crearColumna = element => {
-    const columa = document.createElement('td');
-    columa.appendChild(element);
-    return columa;
+    const columna = document.createElement('td');
+    columna.appendChild(element);
+    return columna;
 };
 
 const crearTexto = element => document.createTextNode(element);
@@ -53,7 +53,7 @@ const dobleClick = e => {
     $('#nombre').val($(hijos[0]).html());
     $('#cuatrimestre').val($(hijos[1]).html());
     $('#fecha').val(fecha);
-    $(hijos[3]).html() === 'Noche' && $('#turno-noche').attr('checked', true);
+    $(hijos[3]).html() === 'Noche' && $('#turno-noche').attr("checked","checked");
     filaSeleccionada = e.target.parentNode.id;
 };
 
@@ -68,17 +68,19 @@ const modificar = e => {
         id : $(`#${filaSeleccionada}`).attr('id'),
         nombre : $('#nombre').val(),
         cuatrimestre : $('#cuatrimestre').val(),
-        fechaFinal : fechaToString($('#fecha').val()), 
-        turno : $('#turno-noche').attr('checked') ? 'Noche' : 'Mañana'
+        fechaFinal : fechaToString($('#fecha').val()),
+        turno : document.querySelector('#turno-noche').checked ? 'Noche' : 'Mañana'
     }
-    $.post(urlPostMofificar, objeto, (data, status) => { 
-        data.type === 'ok' && modificarGrilla(objeto);
-    })
+    $.post(urlPostMofificar, objeto, data => data.type === 'ok' && modificarGrilla(objeto));
     ocultarFormulario();
 }
 
 const modificarGrilla = element => {
-    
+    let fila = $(`#${filaSeleccionada}`),
+    elementosDeFilaSeleccionada = fila[0].children;
+    $(elementosDeFilaSeleccionada[0]).html(element.nombre);
+    $(elementosDeFilaSeleccionada[2]).html(element.fechaFinal);
+    $(elementosDeFilaSeleccionada[3]).html(element.turno);
     ocultarSpinner();
 }
 
@@ -88,8 +90,13 @@ const fechaToString = fecha => {
 }
 
 const eliminar = () => {
-    let fila = $(`#${filaSeleccionada}`);
-    console.log(fila.html())
-
+    mostrarSpinner();
+    ocultarFormulario();
+    let objeto = { id : filaSeleccionada }
+    $.post(urlPostEliminar, objeto, (data, status) => status === 'success' ? eliminarFila() : console.log(data));
 };
 
+const eliminarFila = () => {
+    $(`#${filaSeleccionada}`).remove();
+    ocultarSpinner();
+}
