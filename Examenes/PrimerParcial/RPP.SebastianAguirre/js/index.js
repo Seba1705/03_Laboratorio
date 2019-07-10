@@ -2,7 +2,7 @@ const urlGet = 'http://localhost:3000/personajes',
       urlPostSelect = 'http://localhost:3000/editarEstado',
       urlPostImage = 'http://localhost:3000/editarFoto';  
 
-$(() => {
+$( () => {
     mostrarSpinner();
     $.get(urlGet, (data, status) => status === 'success' && cargarGrilla(data));
 });
@@ -19,12 +19,13 @@ const cargarGrilla = data => {
 };
 
 const crearFila = objeto => {
-    const fila = document.createElement('tr');
-    $(fila).attr('id', `fila-${objeto['id']}`);
-    fila.appendChild(crearColumnaImg(objeto['id'], objeto['foto']));
-    fila.appendChild(crearColumna(crearTexto(objeto['nombre'])));
-    fila.appendChild(crearColumna(crearTexto(objeto['apellido'])));
-    fila.appendChild(crearColumna(crearSelect(objeto['estado'])));
+    const fila = document.createElement('tr'),
+        { id, nombre, apellido, real, estado, foto} = objeto;
+    $(fila).attr('id', `fila-${id}`);
+    fila.appendChild(crearColumnaImg(id, foto));
+    fila.appendChild(crearColumna(crearTexto(nombre)));
+    fila.appendChild(crearColumna(crearTexto(apellido)));
+    fila.appendChild(crearColumna(crearSelect(estado)));
     return fila;
 };
 

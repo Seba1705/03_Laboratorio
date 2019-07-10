@@ -1,4 +1,4 @@
-$(() => {
+$( () => {
     mostrarSpinner();
     $.get('http://localhost:3000/personajes', (data, status) => status === 'success' && cargarGrilla(data));
 });
@@ -15,20 +15,23 @@ const cargarGrilla = data => {
 };
 
 const crearFila = objeto => {
-    const fila = document.createElement('tr');
-    $(fila).attr('id', `fila-${objeto['id']}`);
-    fila.appendChild(crearColumnaImg(objeto['id'], objeto['foto']));
-    fila.appendChild(crearColumna(crearTexto(objeto['nombre'])));
-    fila.appendChild(crearColumna(crearTexto(objeto['apellido'])));
-    fila.appendChild(crearColumna(crearSelect(objeto['estado'])));
+    const fila = document.createElement('tr'),
+          { id, nombre, apellido, real, estado, foto } = objeto;    
+         
+    $(fila).attr('id', `fila-${id}`);
+    fila.appendChild(crearColumnaImg(id, foto));
+    fila.appendChild(crearColumna(crearTexto(nombre)));
+    fila.appendChild(crearColumna(crearTexto(apellido)));
+    fila.appendChild(crearColumna(crearSelect(estado)));
+
     return fila;
 };
 
 const crearColumnaImg = (id, source) => {
-    const columa = document.createElement('td');
-    columa.appendChild(crearImagen(id, source));
-    columa.appendChild(crearInputFile(id));
-    return columa;
+    const columna = document.createElement('td');
+    columna.appendChild(crearImagen(id, source));
+    columna.appendChild(crearInputFile(id));
+    return columna;
 };
 
 const crearImagen = (id, source) => {
