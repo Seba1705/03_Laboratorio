@@ -1,12 +1,9 @@
-const urlGet = 'http://localhost:3000/materias',
-      urlPostEliminar = 'http://localhost:3000/eliminar',
-      urlPostMofificar = 'http://localhost:3000/editar';
-let filaSeleccionada = '';  
+ let filaSeleccionada = '';  
 
-$(() => {
+$( () => {
     ocultarFormulario();
     mostrarSpinner();
-    $.get(urlGet, (data, status) => status === 'success' && cargarGrilla(data));
+    realizarPeticionGet();
     $('#btn-modificar').click(modificar);
     $('#btn-eliminar').click(eliminar);
 });
@@ -18,6 +15,11 @@ const ocultarSpinner = () => $('#contenedor-spinner').hide();
 const mostrarFormulario = () => $('#contenedor-formulario').show();
 
 const ocultarFormulario = () => $('#contenedor-formulario').hide();
+
+const realizarPeticionGet = () => {
+    const urlGet = 'http://localhost:3000/materias';
+    $.get(urlGet, (data, status) => status === 'success' && cargarGrilla(data));
+}
 
 const cargarGrilla = data => {
     // console.log(data);   
@@ -63,6 +65,7 @@ const parsearFecha = fecha => {
 }
 
 const modificar = e => {
+    ocultarFormulario();
     mostrarSpinner();
     let objeto = {
         id : $(`#${filaSeleccionada}`).attr('id'),
@@ -71,12 +74,16 @@ const modificar = e => {
         fechaFinal : fechaToString($('#fecha').val()),
         turno : document.querySelector('#turno-noche').checked ? 'Noche' : 'Mañana'
     }
+    peticionPostModificar(objeto);
+}
+
+const peticionPostModificar = objeto => {
+    const urlPostMofificar = 'http://localhost:3000/editar';
     $.post(urlPostMofificar, objeto, data => data.type === 'ok' && modificarGrilla(objeto));
-    ocultarFormulario();
 }
 
 const modificarGrilla = element => {
-    let fila = $(`#${filaSeleccionada}`),
+    let fila = $(`#${filaSeleccionada}`);
     elementosDeFilaSeleccionada = fila[0].children;
     $(elementosDeFilaSeleccionada[0]).html(element.nombre);
     $(elementosDeFilaSeleccionada[2]).html(element.fechaFinal);
@@ -93,8 +100,13 @@ const eliminar = () => {
     mostrarSpinner();
     ocultarFormulario();
     let objeto = { id : filaSeleccionada }
-    $.post(urlPostEliminar, objeto, (data, status) => status === 'success' ? eliminarFila() : console.log(data));
+    peticionPostEliminar(objeto);
 };
+
+const peticionPostEliminar = objeto => {
+    let urlPostEliminar = 'http://localhost:3000/eliminar';
+    $.post(urlPostEliminar, objeto, (data, status) => status === 'success' ? eliminarFila() : console.log(data));
+}
 
 const eliminarFila = () => {
     $(`#${filaSeleccionada}`).remove();

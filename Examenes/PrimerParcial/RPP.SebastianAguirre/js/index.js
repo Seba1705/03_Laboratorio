@@ -1,15 +1,16 @@
-const urlGet = 'http://localhost:3000/personajes',
-      urlPostSelect = 'http://localhost:3000/editarEstado',
-      urlPostImage = 'http://localhost:3000/editarFoto';  
-
 $( () => {
     mostrarSpinner();
-    $.get(urlGet, (data, status) => status === 'success' && cargarGrilla(data));
+    realizarPeticionGet();
 });
 
 const mostrarSpinner = () => $('#contenedor-spinner').show();
 
 const ocultarSpinner = () => $('#contenedor-spinner').hide();
+
+const realizarPeticionGet = () => {
+    const urlGet = 'http://localhost:3000/personajes';
+    $.get(urlGet, (data, status) => status === 'success' && cargarGrilla(data));
+}
 
 const cargarGrilla = data => {
     // console.log(data);   
@@ -44,7 +45,10 @@ const crearImagen = (id, source) => {
     return etiquetaImg;
 };
 
-const mostrarInputFile = e => $(e.target.parentNode.lastChild).toggle(600);
+const mostrarInputFile = e => {
+    let inputFileSeleccionado = e.target.parentNode.lastChild
+    $(inputFileSeleccionado).toggle(600);
+}
 
 const crearInputFile = id => {
     const inputFile = document.createElement('input');
@@ -66,12 +70,14 @@ const crearInputFile = id => {
     return inputFile;
 };
 
-const cambiarFotoPost = objeto => $.post( urlPostImage, objeto, (data, status) => status === 'success' && ocultarSpinner() );
-    
+const cambiarFotoPost = objeto => {
+    const urlPostImage = 'http://localhost:3000/editarFoto';  
+    $.post( urlPostImage, objeto, (data, status) => status === 'success' && ocultarSpinner() );
+}
 const crearColumna = element => {
-    const columa = document.createElement('td');
-    columa.appendChild(element);
-    return columa;
+    const columna = document.createElement('td');
+    columna.appendChild(element);
+    return columna;
 };
 
 const crearTexto = element => document.createTextNode(element);
@@ -89,6 +95,12 @@ const modificarEstado = e => {
     let id = e.target.parentNode.parentNode.id.split('fila-')[1],
         estado = $(e.target).val(),
         objeto = { id : id, estado : estado }
-    $.post( urlPostSelect, objeto, (data, status) =>  status === 'success' && ocultarSpinner() );                        
+    cambiarEstadoPost(objeto);               
 };
+
+const cambiarEstadoPost = objeto => {
+    const urlPostSelect = 'http://localhost:3000/editarEstado';
+    $.post( urlPostSelect, objeto, (data, status) =>  status === 'success' && ocultarSpinner() ); 
+}
+
 
