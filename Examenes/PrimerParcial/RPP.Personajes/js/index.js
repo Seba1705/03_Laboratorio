@@ -21,7 +21,7 @@ const cargarGrilla = data => {
 
 const crearFila = objeto => {
     const fila = document.createElement('tr'),
-        { id, nombre, apellido, real, estado, foto} = objeto;
+        { id, nombre, apellido, estado, foto} = objeto;
     $(fila).attr('id', `fila-${id}`);
     fila.appendChild(crearColumnaImg(id, foto));
     fila.appendChild(crearColumna(crearTexto(nombre)));
@@ -46,17 +46,17 @@ const crearImagen = (id, source) => {
 };
 
 const mostrarInputFile = e => {
-    let inputFileSeleccionado = e.target.parentNode.lastChild
+    let inputFileSeleccionado = e.target.parentNode.lastChild;
     $(inputFileSeleccionado).toggle(600);
 }
 
 const crearInputFile = id => {
     const inputFile = document.createElement('input');
-    $(inputFile).change(function(){     
+    $(inputFile).change( function(){     
         if (this.files && this.files[0]) {
             mostrarSpinner();
             let fReader = new FileReader();
-            fReader.addEventListener("load", function(e) {
+            fReader.addEventListener("load", e => {
                 let objeto = { id: id, foto : e.target.result};
                 cambiarFotoPost(objeto);
                 $(`#img-${id}`).attr("src",e.target.result);
@@ -72,8 +72,9 @@ const crearInputFile = id => {
 
 const cambiarFotoPost = objeto => {
     const urlPostImage = 'http://localhost:3000/editarFoto';  
-    $.post( urlPostImage, objeto, (data, status) => status === 'success' && ocultarSpinner() );
+    $.post( urlPostImage, objeto, (data, status) => status === 'success' ? ocultarSpinner() : console.log(data));
 }
+
 const crearColumna = element => {
     const columna = document.createElement('td');
     columna.appendChild(element);
@@ -100,7 +101,7 @@ const modificarEstado = e => {
 
 const cambiarEstadoPost = objeto => {
     const urlPostSelect = 'http://localhost:3000/editarEstado';
-    $.post( urlPostSelect, objeto, (data, status) =>  status === 'success' && ocultarSpinner() ); 
+    $.post( urlPostSelect, objeto, (data, status) =>  status === 'success' ? ocultarSpinner() : console.log(data) ); 
 }
 
 

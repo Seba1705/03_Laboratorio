@@ -30,19 +30,22 @@ const cargarGrilla = data => {
 
 const crearFila = objeto => {
     // console.log(objeto);
-    const fila = document.createElement('tr');
-    $(fila).attr('id',objeto['id']);
-    fila.appendChild(crearColumna(crearTexto(objeto['nombre'])));
-    fila.appendChild(crearColumna(crearTexto(objeto['cuatrimestre'])));
-    fila.appendChild(crearColumna(crearTexto(objeto['fechaFinal'])));
-    fila.appendChild(crearColumna(crearTexto(objeto['turno'])));
+    const fila = document.createElement('tr'),
+        { id, nombre, cuatrimestre, fechaFinal, turno } = objeto;
+
+    $(fila).attr('id', id);
+    fila.appendChild(crearColumna(nombre));
+    fila.appendChild(crearColumna(cuatrimestre));
+    fila.appendChild(crearColumna(fechaFinal));
+    fila.appendChild(crearColumna(turno));
     $(fila).dblclick(dobleClick);
     return fila;
 };
 
 const crearColumna = element => {
-    const columna = document.createElement('td');
-    columna.appendChild(element);
+    const columna = document.createElement('td'),
+          contenido = crearTexto(element);
+    columna.appendChild(contenido);
     return columna;
 };
 
@@ -50,18 +53,21 @@ const crearTexto = element => document.createTextNode(element);
 
 const dobleClick = e => {
     mostrarFormulario();
-    let hijos = e.target.parentNode.children,
-        fecha = parsearFecha($(hijos[2]).html());
-    $('#nombre').val($(hijos[0]).html());
-    $('#cuatrimestre').val($(hijos[1]).html());
+    const [nombre, cuatrimestre, fechaFinal, turno ] = e.target.parentNode.children,
+        fecha = parsearFecha($(fechaFinal).html());
+    $('#nombre').val($(nombre).html());
+    $('#cuatrimestre').val($(cuatrimestre).html());
     $('#fecha').val(fecha);
-    $(hijos[3]).html() === 'Noche' && $('#turno-noche').attr("checked","checked");
+    $(turno).html() === 'Noche' && $('#turno-noche').attr("checked","checked");
     filaSeleccionada = e.target.parentNode.id;
+    
 };
 
 const parsearFecha = fecha => {
-    let parts = fecha.split('/');
-    return (`${parts[2]}-${parts[1]}-${parts[0]}`);
+    console.log(fecha)
+    let parts = fecha.split('/'),
+        [ dia, mes, anio ] = parts;
+    return (`${anio}-${mes}-${dia}`);
 }
 
 const modificar = e => {
@@ -92,8 +98,9 @@ const modificarGrilla = element => {
 }
 
 const fechaToString = fecha => {
-    let parts = fecha.split('-');
-    return (`${parts[2]}/${parts[1]}/${parts[0]}`);
+    let parts = fecha.split('-'),
+        [ anio, mes, dia ] = parts;
+    return (`${dia}/${mes}/${anio}`);
 }
 
 const eliminar = () => {
