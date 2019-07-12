@@ -42,7 +42,8 @@ img{
 
 /********************************** SPINNER **********************************/
 
-#contenedor-spinner{
+#contenedor-spinner
+#contenedor-formulario{
     background-color: rgba(250, 240, 245, 0.9);
     height: 100%;
     width: 100%;
@@ -72,15 +73,79 @@ img{
         to {transform: rotate(360deg);}
     }
 
-/********************************** SELECT   **********************************/
+/********************************** FORMULARIO   **********************************/
 
-select{
-    width: 50%;
+
+@keyframes aparecer{
+    from{ opacity: 0; }
+    to {opacity: 1; }
+}
+
+
+.formulario{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    padding: 15px;
+    background: #f2f2f2;
+    border-radius: 10px;
+    /* margin: 30px; */
+    width: 40%;
+    height: 380px;
+    animation: aparecer 1.5s ease;
+}
+
+.formulario input[type=text],
+.formulario input[type=date],
+.formulario select{
+    width: 100%;
     padding: 5px;
-    margin: 6px 0;
+    margin: 4px 0;
     display: inline-block;
     border: 1px solid #b8b3b3;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 15px; 
+    font-size: 15px;
 }
+
+.formulario section {
+    width: 100%;
+    padding: 5px;
+    margin: 4px 0;
+    display: inline-block;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.formulario input[type=button] {
+    width: 100%;
+    padding: 5px;
+    margin: 4px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #f2f2f2;
+    font-size: 15px;
+    color: white;
+}
+
+#btn-modificar{
+    background-color: green;
+}
+
+#btn-eliminar{
+    background: red;
+}
+
+.formulario label,
+.formulario input[type=radio]{
+    margin: 0 15px 0 0;
+    font-size: 1rem;
+} 

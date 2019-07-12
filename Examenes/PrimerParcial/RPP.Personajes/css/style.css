@@ -1,0 +1,162 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/********************************** TABLA **********************************/
+
+table{
+    width: 100%;
+    border-collapse: collapse; /*sin bordes entre los elementos internos*/
+}
+
+th, td{
+    text-align: center;
+    padding: 10px;
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+th{
+    background:#252932;
+    color: #fff;
+    font: bold;
+}
+
+/* IMAGEN */
+
+img{
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+}
+
+/********************************** SPINNER **********************************/
+
+#contenedor-spinner,
+#contenedor-formulario{
+    background-color: rgba(250, 240, 245, 0.9);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    transition: all 1s ease;
+    z-index: 10000;
+}
+
+    #spinner{
+        border: 15px solid #ccc;
+        border-top-color: #252932;
+        border-top-style: groove;
+        height: 100px;
+        width: 100px;
+        border-radius: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        animation: girar 1.5s linear infinite;
+    }
+
+    @keyframes girar{
+        from{ transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+    }
+
+/********************************** FORMULARIO   **********************************/
+
+
+@keyframes aparecer{
+    from{ opacity: 0; }
+    to {opacity: 1; }
+}
+
+
+.formulario{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    padding: 15px;
+    background: #f2f2f2;
+    border-radius: 10px;
+    /* margin: 30px; */
+    width: 40%;
+    height: 380px;
+    animation: aparecer 1.5s ease;
+}
+
+.formulario input[type=text],
+.formulario input[type=date],{
+    width: 100%;
+    padding: 5px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #b8b3b3;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.formulario section {
+    width: 100%;
+    padding: 5px;
+    margin: 4px 0;
+    display: inline-block;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.formulario input[type=button] {
+    width: 100%;
+    padding: 5px;
+    margin: 4px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #f2f2f2;
+    font-size: 15px;
+    color: white;
+}
+
+#btn-modificar{
+    background-color: green;
+}
+
+#btn-eliminar{
+    background: red;
+}
+
+.formulario label,
+.formulario input[type=radio]{
+    margin: 0 15px 0 0;
+    font-size: 1rem;
+} 
+
+
+select{
+    width: 50%;
+    padding: 5px;
+    margin: 6px 0;
+    display: inline-block;
+    border: 1px solid #b8b3b3;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px; 
+}
