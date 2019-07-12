@@ -1,7 +1,7 @@
 $( () => {
-    mostrarSpinner();
+    ocultarSpinner();
     ocultarFormulario();
-    realizarPeticionGet('personajes'); //Nombre del servidor
+    realizarPeticionGet(''); //Nombre del servidor
 });
 
 const mostrarSpinner = () => $('#contenedor-spinner').show();
@@ -25,18 +25,16 @@ const realizarPeticionPost = (objeto, path) => {
 const cargarDatosEnTabla = objetoJson => {
     const tabla = $('#tabla');
     objetoJson.forEach( objeto => tabla.append(crearFila(objeto)));
-    ocultarSpinner();
 };
 
 const crearFila = objeto => {
     const fila = document.createElement('tr'),
-        { id, foto, nombre, apellido, estado } = objeto;
+        { id, foto, nombre, estado } = objeto;
     
     $(fila).attr('id', `fila-${id}`);
 
     fila.appendChild(crearColumnaConImagen(foto, id));
     fila.appendChild(crearColumnaConTexto(nombre));
-    fila.appendChild(crearColumnaConTexto(apellido));
     fila.appendChild(crearColumnaConSelect(estado));
 
     return fila;
@@ -79,7 +77,7 @@ const crearInputFile = id => {
             let fReader = new FileReader();
             fReader.addEventListener("load", e => {
                 let objeto = { id, foto : e.target.result};
-                realizarPeticionPost(objeto, 'editarFoto');
+                realizarPeticionPost(objeto, '');
                 $(`#img-${id}`).attr("src", e.target.result);
             });       
             fReader.readAsDataURL( this.files[0] );
@@ -119,19 +117,19 @@ const crearColumnaConSelect = element => {
 const crearEtiquetaSelect = element => {
     const select = document.createElement('select');
     
-    $(select).html("<option>Vivo</option><option>Muerto</option>");
+    $(select).html("<option>1</option><option>2</option>");
     $(select).val(element);
     $(select).change(modificarEstado);
 
     return select;
 };
 
-const modificarEstado = e => {
+const modificarEstado = () => {
     let id = e.target.parentNode.parentNode.id.split('fila-')[1],
         estado = $(e.target).val(),
         objeto = { id, estado };
 
     mostrarSpinner();
 
-    realizarPeticionPost(objeto, 'editarEstado');     
+    realizarPeticionPost(objeto, '');     
 }

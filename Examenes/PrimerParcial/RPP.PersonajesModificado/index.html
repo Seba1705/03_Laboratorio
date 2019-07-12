@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="./js/script.js"></script>
+        <link rel="stylesheet" href="./css/style.css">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="contenedor-spinner">
+            <div id="spinner"></div>
+        </div>
+        <div id="contenedor-formulario">
+            <form action="" class="formulario">
+                <section>
+                    <label for="">Foto</label>
+                    <input type="file" name="" id="input-foto">
+                </section>
+                <section>
+                    <label for="">Nombre</label>
+                    <input type="text" name="" id="input-nombre">
+                </section>
+                <section>
+                    <label for="">Apellido</label>
+                    <input type="text" name="" id="input-apellido">
+                </section>
+    
+                <section>
+                    <label for="">Estado</label>
+                    <section>
+                        <label for="">Vivo</label>
+                        <input type="radio" name="radio" id="vivo" checked>
+                        <label for="">Muerto</label>
+                        <input type="radio" name="radio" id="muerto">
+                    </section>
+                </section>
+                <input type="button" value="Agregar" id="btn-agregar">
+            </form>
+        </div>
+
+        <div class="container">
+
+            <button id="btn-mostrar">Agregar Nuevo personaje</button>       
+        
+            <table>
+                <thead>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Estado</th>  
+                    <!-- <th>5</th>       -->
+                </thead>
+                <tbody id="tabla"></tbody>
+            </table>
+        </div>
+    
+    </body>
+</html>
